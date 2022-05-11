@@ -51,4 +51,4 @@ To get you started, I've set up a few basics so that you can immediately start w
    - `puts @variable.inspect`
    - `puts "NOTICE ME: #{@variable.inspect}"`
  - You can add environmental variables to the `.env` file. These will then get automatically loaded, but you need to restart the server to load and changes.
-   - If it's a sensitive variable, then create a `.env.local` file, which will do the same thing but be ignored by version controll.
+   - If it's a sensitive variable, then create a `.env.local` file, which will do the same thing but be ignored by version control.
