@@ -1,7 +1,21 @@
 // HTML tags are written with a simpler indentation based syntax
+javascript:
+      // function hello(){
+     //   debugger;
+     // alert(document.getElementById('med_audio').currentTime)
+      // }
+
+
+
+
 section.visual
   img src="https://picsum.photos/200/300"
+  / img src=@meditation
   video autoplay=true muted=true controls="false" src=""
 
-  audio controls=true autoplay=true loop=true muted=true
-    source src=@meditation
+  audio id="med_audio" controls=true autoplay=true loop=true muted=true
+    source src=@testAudio
+
+h3 
+  | Some text
+  = link_to 'Some link', @post
