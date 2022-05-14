@@ -63,10 +63,10 @@ module BubbleApi
       # text = "Current number is: #{n[i]['results']['Meditation']}"
       # i++
       # puts 'reading media'
-      puts '----------------'
-      puts media['_id']
-      puts media_id
-      puts '----------------'
+      # puts '----------------'
+      # puts media['_id']
+      # puts media_id
+      # puts '----------------'
       if media['_id'] == media_id
         # puts "inside first if"
         if media["Type"] == "Image" 
@@ -92,16 +92,22 @@ module BubbleApi
     parsed_json = JSON.parse(response.body)
     results = parsed_json["response"]
     
+    mediaArray = Array.new
+
     results['results'].each do |frame|
       # puts 'reading frame'
       # puts frame['Meditation']
       if frame['Meditation'] == meditation_id
         related_media = fetch_media(frame["Media"])
         puts related_media
+        mediaArray.push(related_media)
         puts frame["Timestamp"]
       end
     end
-    end
+    
+    return mediaArray
+    
+  end
 
 
 end

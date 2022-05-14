@@ -1,15 +1,16 @@
 // HTML tags are written with a simpler indentation based syntax
-javascript:
-      // function hello(){
-     //   debugger;
-     // alert(document.getElementById('med_audio').currentTime)
-      // }
-
 section.visual
-  img id="med_img" src="https://picsum.photos/200/300"
+  div id="frames"
+  -  for item in @frames
+      img id="med_img" src=item
+  // img id="med_img" src="https://picsum.photos/200/300"
   // img src=@meditation
   video id="med_video" autoplay=true muted=true controls="false" src=""
 
 div id="audio_timeline"
   audio id="med_audio" controls=true autoplay=true loop=true muted=true
     source src=@meditation_audio
+
+/ div id="frames"
+/   -  for item in @frames
+/       img id="med_img" src=item
