@@ -5,21 +5,50 @@ let audio, video, image, frames;
 
 function updateImage(curTime) {
     console.log(curTime);    
+    debugger;
+    for (let i=0; i<frames.length;i++ ){
+        if(i == (frames.length-1)){
+            if( curTime >= frames[i][1]  ){
+                image.src = frames[i][0];
+                console.log(frames[i][0])
+            } 
+        }else{
+            if( curTime > frames[i][1] && curTime < frames[i+1][1]  ){
+                // console.log('here');
+                image.src = frames[i][0];
+                console.log(frames[i][0])
+            } 
+
+        }
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => { 
+    // data is a global variable set from embed.html.slim
+    frames = JSON.parse(data.replace(/&quot;/g, '"'))
     
-    let frames = JSON.parse(data.replace(/&quot;/g, '"'))
-    debugger;
     video = document.getElementById('med_video');
     audio = document.getElementById('med_audio');
     image = document.getElementById('med_img');
+    debugger;
+    // image.src = frames[0][0];
 
-    audio.addEventListener("seeking", () => { 
+    // audio.addEventListener("seeking", () => { 
+    //     updateImage(audio.currentTime)
+    //  });
+
+
+    //  audio.addEventListener("play", () => { 
+    //     updateImage(audio.currentTime)
+    //  });
+
+    //  audio.addEventListener("playing", () => { 
+    //      debugger;
+    //     updateImage(audio.currentTime)
+    //  });
+
+
+     audio.addEventListener('timeupdate', (event) => {
         updateImage(audio.currentTime)
-     });
-
+      });
  });
-
-
-

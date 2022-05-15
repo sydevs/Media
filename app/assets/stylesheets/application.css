@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+#med_img {
+    width: 30%;
+    height: 30%;
+}
