@@ -1,6 +1,9 @@
 // HTML tags are written with a simpler indentation based syntax
+javascript:
+  const data = "#{@frames.to_json}"
+
 section.visual
-  div id="frames"
+  div id="frames" data=@frames
   -  for item in @frames
       img id="med_img" src=item
   // img id="med_img" src="https://picsum.photos/200/300"

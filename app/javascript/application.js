@@ -4,17 +4,13 @@ import "@hotwired/turbo-rails"
 let audio, video, image, frames;
 
 function updateImage(curTime) {
-    console.log(curTime);
-
-
-
-
-    
+    console.log(curTime);    
 }
 
 document.addEventListener("DOMContentLoaded", () => { 
+    
+    let frames = JSON.parse(data.replace(/&quot;/g, '"'))
     debugger;
-
     video = document.getElementById('med_video');
     audio = document.getElementById('med_audio');
     image = document.getElementById('med_img');

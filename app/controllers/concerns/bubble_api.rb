@@ -84,7 +84,6 @@ module BubbleApi
   end
 
 
-
   def self.fetch_frame meditation_id
 
     url = "https://app.sydevelopers.com/version-test/api/1.1/obj/Meditation%20Frame"
@@ -100,14 +99,11 @@ module BubbleApi
       if frame['Meditation'] == meditation_id
         related_media = fetch_media(frame["Media"])
         puts related_media
-        mediaArray.push(related_media)
+        mediaArray.push([related_media, frame["Timestamp"]])
         puts frame["Timestamp"]
       end
     end
-    
+  
     return mediaArray
-    
   end
-
-
 end
