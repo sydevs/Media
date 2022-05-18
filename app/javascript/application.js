@@ -5,7 +5,6 @@ let audio, video, image, frames;
 
 function updateImage(curTime) {
     console.log(curTime);    
-    debugger;
     for (let i=0; i<frames.length;i++ ){
         if(i == (frames.length-1)){
             if( curTime >= frames[i][1]  ){
@@ -30,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     video = document.getElementById('med_video');
     audio = document.getElementById('med_audio');
     image = document.getElementById('med_img');
-    debugger;
+
     // image.src = frames[0][0];
 
     // audio.addEventListener("seeking", () => { 
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //  });
 
     //  audio.addEventListener("playing", () => { 
-    //      debugger;
+    //      
     //     updateImage(audio.currentTime)
     //  });
 
