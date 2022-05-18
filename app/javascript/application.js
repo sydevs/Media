@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     video = document.getElementById('med_video');
     audio = document.getElementById('med_audio');
     image = document.getElementById('med_img');
-    image.src ="http://meditatenepal.org/img/white.jpg";
+    image.src ="http://www.meditatenepal.org/img/white.jpg";
 
     // image.src = frames[0][0];
 
