@@ -4,9 +4,9 @@ include BubbleApi
 
   def embed
 
-    @client = Client.find_by_public_key(params[:api_key])
-    return if !params[:api_key].present?
-    raise ActionController::RoutingError.new('Not Found') if @client.nil?
+    # @client = Client.find_by_public_key(params[:api_key])
+    # return if !params[:api_key].present?
+    # raise ActionController::RoutingError.new('Not Found') if @client.nil?
 
     headers['X-FRAME-OPTIONS'] = "ALLOW ALL"
     headers['Access-Control-Allow-Origin'] = '*'
