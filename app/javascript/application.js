@@ -8,13 +8,23 @@ function updateImage(curTime) {
     for (let i=0; i<frames.length;i++ ){
         if(i == (frames.length-1)){
             if( curTime >= frames[i][1]  ){
-                image.src = frames[i][0];
+                debugger;
+                if( (frames[i][0].substr(frames[i][0].length-3) == 'mp4')){
+                    video.src = frames[i][0]; 
+                }else{
+                    image.src = frames[i][0];   
+                }
+                
                 console.log(frames[i][0])
             } 
         }else{
             if( curTime > frames[i][1] && curTime < frames[i+1][1]  ){
                 // console.log('here');
-                image.src = frames[i][0];
+                if( (frames[i][0].substr(frames[i][0].length-3) == 'mp4')){
+                    video.src = frames[i][0]; 
+                }else{
+                    image.src = frames[i][0];   
+                }
                 console.log(frames[i][0])
             } 
 
