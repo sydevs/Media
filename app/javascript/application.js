@@ -20,17 +20,15 @@ function updateMedia(curTime) {
             console.log('video src change')
         }
     } else {
-        debugger;
+        // debugger;
         image.style.display = "block";
         video.style.display = "none";
         image.src = frames[currentFrame][0];
     }
     if (curTime > nextFrame) {
-
         if (currentFrame < frames.length-1) {
             currentFrame++;
         }
-       
     }
     // curTime > frames[i][1] && curTime < frames[i + 1][1]
     // if(frames[currentFrame][0] >= curTime ){
