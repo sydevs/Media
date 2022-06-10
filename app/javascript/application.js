@@ -3,38 +3,63 @@ import "@hotwired/turbo-rails"
 
 let audio, video, image, frames;
 let currentFrame = 0;
-let nextFrame = 1;
+let nextFrameTime = 0;
 
 function updateMedia(curTime) {
     // debugger;
-    console.log(currentFrame + " " + nextFrame);
-    if (currentFrame < frames.length-1) {
-        nextFrame = frames[currentFrame + 1][1];
+    console.log(currentFrame + " " + nextFrameTime);
+
+    if (currentFrame < frames.length - 1) {
+        nextFrameTime = frames[currentFrame + 1][1];
     }
 
-    if ((frames[currentFrame][0].substr(frames[currentFrame][0].length - 3) == 'mp4')) {
-        if (video.src != frames[currentFrame][0]) {
-            video.style.display = "block";
-            image.style.display = "none";
-            video.src = frames[currentFrame][0];
-            console.log('video src change')
-        }
-    } else {
-        // debugger;
-        image.style.display = "block";
-        video.style.display = "none";
-        image.src = frames[currentFrame][0];
-    }
-    if (curTime > nextFrame) {
-        if (currentFrame < frames.length-1) {
+    if (curTime > nextFrameTime) {
+        if (currentFrame < frames.length - 1) {
             currentFrame++;
         }
     }
-    // curTime > frames[i][1] && curTime < frames[i + 1][1]
-    // if(frames[currentFrame][0] >= curTime ){
 
-    // }
+    if (currentFrame == 0) {
+        if ((frames[currentFrame][0].substr(frames[currentFrame][0].length - 3) == 'mp4')) {
+            if (video.src != frames[currentFrame][0]) {
+                video.style.display = "block";
+                image.style.display = "none";
+                video.src = frames[currentFrame][0];
+                console.log('video src change')
+            }
+        } else {
+            // debugger;
+            image.style.display = "block";
+            video.style.display = "none";
+            debugger;
+            
+            image.src = frames[currentFrame][0];
+            console.log('image src change , image src = ' + frames[currentFrame][0]);
+        }
 
+    } else {
+        // dont update the image and video until its time
+        if (curTime < nextFrameTime) {
+            return
+        } else {
+            if ((frames[currentFrame][0].substr(frames[currentFrame][0].length - 3) == 'mp4')) {
+                if (video.src != frames[currentFrame][0]) {
+                    video.style.display = "block";
+                    image.style.display = "none";
+                    video.src = frames[currentFrame][0];
+                    console.log('video src change')
+                }
+            } else {
+                // debugger;
+                image.style.display = "block";
+                video.style.display = "none";
+                debugger;
+                image.src = frames[currentFrame][0];
+                console.log(image);
+                console.log('image src change, not the first one, image src = ' + frames[currentFrame][0])
+            }
+        }
+    }
 }
 
 function updateImage(curTime) {
