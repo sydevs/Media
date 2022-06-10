@@ -119,4 +119,10 @@ document.addEventListener("DOMContentLoaded", () => {
         // updateImage(audio.currentTime);
         updateMedia(audio.currentTime);
     });
+
+    audio.addEventListener('seeked', (event) => {
+        // updateImage(audio.currentTime);
+        debugger;
+        updateMedia(audio.currentTime);
+    });
 });

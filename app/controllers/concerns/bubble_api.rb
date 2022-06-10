@@ -14,12 +14,12 @@ module BubbleApi
       id: meditation_id,
     }
 
-
+    # puts meditation_id  
     # Set the correct URL for the REST API
     # url = "https://app.sydevelopers.com/version-test/api/1.1/obj/Meditation/1644108823956x994255784581267500"
     # url = "https://app.sydevelopers.com/version-test/api/1.1/obj/Meditation%20Frame?Meditation=1644108823956x994255784581267500"
 
-    url = "https://app.sydevelopers.com/version-test/api/1.1/obj/Meditation/1644109290070x892742463383404500"
+    url = "https://app.sydevelopers.com/version-test/api/1.1/obj/Meditation/" + meditation_id
     # id 1644108823956x994255784581267500
     # url  "https://wemeditate.bubbleapps.io/api?#{parameters.to_query}"
 
@@ -37,7 +37,7 @@ module BubbleApi
     # puts response
     # data = response["response"]["results"] 
     parsed_json = JSON.parse(response.body)
-    puts parsed_json["response"]["Audio"]
+    # puts parsed_json["response"]["Audio"]
 
     # data.each do |item|
     #   puts item["Image"]
@@ -56,8 +56,8 @@ module BubbleApi
     results = parsed_json["response"]
     i=0
 
-    puts 'media id' + media_id
-    puts results['results']
+    # puts 'media id' + media_id
+    # puts results['results']
 
     results['results'].each do |media|
       # text = "Current number is: #{n[i]['results']['Meditation']}"
@@ -98,9 +98,9 @@ module BubbleApi
       # puts frame['Meditation']
       if frame['Meditation'] == meditation_id
         related_media = fetch_media(frame["Media"])
-        puts related_media
+        # puts related_media
         mediaArray.push([related_media, frame["Timestamp"]])
-        puts frame["Timestamp"]
+        # puts frame["Timestamp"]
       end
     end
   
