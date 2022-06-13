@@ -5,7 +5,7 @@ javascript:
 section.visual
   div id="frames" data=@frames
     img id="med_img"
-    video id="med_video" autoplay=false muted=true controls="false" src="" 
+    video id="med_video" autoplay=false muted=true playsinline controls="false" src="" 
 
   //-  for item in @frames
   //    img id="med_img" src=item
@@ -14,8 +14,16 @@ section.visual
       
 
 div id="audio_timeline"
-  audio id="med_audio" controls=true autoplay=true loop=true muted=false
+  audio id="med_audio" controls=true autoplay=true loop=true muted=false controlsList="nodownload noplaybackrate"
     source src=@meditation_audio
+
+
+// div id="audio-player-container"
+//   button id="play-icon" p
+//   span id="current-time" class="time"
+//   input type="range" id="seek-slider" max="100" value="0"
+//   button id="mute-icon"
+
 
 //div id="frames"
 //  -  for item in @frames
