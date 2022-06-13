@@ -7,7 +7,7 @@ let nextFrameTime = 0;
 
 function updateMedia(curTime, seeked) {
     // debugger;
-    console.log(currentFrame + " " + nextFrameTime);
+    // console.log(currentFrame + " " + nextFrameTime);
 
     if (seeked) {
         for (var i = 0; i < frames.length; i++) {
@@ -17,7 +17,7 @@ function updateMedia(curTime, seeked) {
                 break;
             }
         }
-        console.log("Updated : " + currentFrame + " " + nextFrameTime);
+        // console.log("Updated : " + currentFrame + " " + nextFrameTime);
     }
 
     if (currentFrame < frames.length - 1) {
@@ -43,19 +43,19 @@ function updateMedia(curTime, seeked) {
                 if(!audio.paused){
                     video.play();
                 }
-                console.log('video src change');
+                // console.log('video src change');
             }
         } else {
             image.style.display = "block";
             video.style.display = "none";
             image.src = frames[currentFrame][0];
-            console.log('image src change , image src = ' + frames[currentFrame][0]);
+            // console.log('image src change , image src = ' + frames[currentFrame][0]);
         }
 
     } else {
         // don't update the image and video until its time
         if ((curTime) < nextFrameTime && !seeked) {
-            console.log(nextFrameTime - curTime + ' returning');
+            // console.log(nextFrameTime - curTime + ' returning');
             return
         } else {
             if ((frames[currentFrame][0].substr(frames[currentFrame][0].length - 3) == 'mp4')) {
@@ -65,22 +65,22 @@ function updateMedia(curTime, seeked) {
                     let videoToSeek = curTime - frames[currentFrame][1];
                     video.currentTime = videoToSeek;
                     video.load();
-                    console.log("video paused? " + video.paused)
+                    // console.log("video paused? " + video.paused);
                     if(!audio.paused){
                         video.play();
                     }
                     
                     image.style.display = "none";
                     image.src = "";
-                    console.log('video src change')
+                    // console.log('video src change')
                 }
             } else {
                 image.style.display = "block";
                 video.style.display = "none";
                 video.src
                 image.src = frames[currentFrame][0];
-                console.log(image);
-                console.log('image src change, not the first one, image src = ' + frames[currentFrame][0])
+                // console.log(image);
+                // console.log('image src change, not the first one, image src = ' + frames[currentFrame][0])
             }
         }
     }
