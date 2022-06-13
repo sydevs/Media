@@ -20,7 +20,6 @@ function updateMedia(curTime, seeked) {
         console.log("Updated : " + currentFrame + " " + nextFrameTime);
     }
 
-
     if (currentFrame < frames.length - 1) {
         nextFrameTime = frames[currentFrame + 1][1];
     }
@@ -156,9 +155,17 @@ document.addEventListener("DOMContentLoaded", () => {
         updateMedia(audio.currentTime, false);
     });
 
+    audio.addEventListener('play', (event) => {
+        // updateImage(audio.currentTime);
+        if(video.src != ''){
+            video.play();
+        }
+       
+    });
+
     audio.addEventListener('seeked', (event) => {
         // updateImage(audio.currentTime);
-        debugger;
+        // debugger;
         updateMedia(audio.currentTime, true);
     });
 });
