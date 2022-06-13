@@ -150,6 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    audio.addEventListener('pause', (event) => {
+        if (video.src != '') {
+            video.pause();
+        }
+    });
+
     audio.addEventListener('seeked', (event) => {
         // debugger;
         updateMedia(audio.currentTime, true);
