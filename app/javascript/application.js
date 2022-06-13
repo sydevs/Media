@@ -40,14 +40,16 @@ function updateMedia(curTime, seeked) {
                 image.style.display = "none";
                 image.src = "";
                 video.load();
-                video.play();
+                if(!audio.paused){
+                    video.play();
+                }
                 console.log('video src change');
             }
         } else {
             image.style.display = "block";
             video.style.display = "none";
             image.src = frames[currentFrame][0];
-            // console.log('image src change , image src = ' + frames[currentFrame][0]);
+            console.log('image src change , image src = ' + frames[currentFrame][0]);
         }
 
     } else {
@@ -63,7 +65,7 @@ function updateMedia(curTime, seeked) {
                     let videoToSeek = curTime - frames[currentFrame][1];
                     video.currentTime = videoToSeek;
                     video.load();
-                    console.log("vudeo paused? " + video.paused)
+                    console.log("video paused? " + video.paused)
                     if(!audio.paused){
                         video.play();
                     }
@@ -128,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
     video = document.getElementById('med_video');
     audio = document.getElementById('med_audio');
     image = document.getElementById('med_img');
+    // keep a temporary white background
     image.src = "http://www.meditatenepal.org/img/white.jpg";
     image.style.display = "none";
     video.style.display = "none";
@@ -137,34 +140,18 @@ document.addEventListener("DOMContentLoaded", () => {
         return a[1] - b[1]
     });
 
-    // image.src = frames[0][0];
-
-    //  audio.addEventListener("play", () => { 
-    //     updateImage(audio.currentTime)
-    //  });
-
-    //  audio.addEventListener("playing", () => { 
-    //      
-    //     updateImage(audio.currentTime)
-    //  });
-
-
     audio.addEventListener('timeupdate', (event) => {
-        // updateImage(audio.currentTime);
         // debugger;
         updateMedia(audio.currentTime, false);
     });
 
     audio.addEventListener('play', (event) => {
-        // updateImage(audio.currentTime);
         if(video.src != ''){
             video.play();
         }
-       
     });
 
     audio.addEventListener('seeked', (event) => {
-        // updateImage(audio.currentTime);
         // debugger;
         updateMedia(audio.currentTime, true);
     });
