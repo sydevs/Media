@@ -10,6 +10,14 @@ class SahajMediaEmbed {
   #begin
   #activeImage
 
+  get state() {
+    return this.#container.dataset.state
+  }
+
+  set state(value) {
+    this.#container.dataset.state = value
+  }
+
   constructor() {
     this.#container = document.getElementById('sym-container')
     this.#audio = document.getElementById('sym-audio')
@@ -20,15 +28,33 @@ class SahajMediaEmbed {
     this.#activeImage = this.#images[0]
 
     this.#audio.ontimeupdate = () => {
-      this.updateTime()
+      //this.updateTime()
       this.updateImage()
     }
 
     this.#begin = document.getElementById('sym-begin')
-    this.#begin.onclick = (event) => {
-      this.#container.dataset.state = 'playing'
+    this.#begin.onclick = event => {
+      this.state = 'playing'
       this.#audio.play()
       setTimeout(() => this.#begin.remove(), 1000)
+      event.stopPropagation()
+      event.preventDefault()
+      return false
+    }
+
+    this.#container.onclick = event => {
+      if (this.state == 'intro') {
+        return
+      } else if (this.state == 'paused') {
+        this.#audio.play()
+        this.state = 'playing'
+      } else {
+        this.#audio.pause()
+        this.state = 'paused'
+      }
+
+      this.updateTime()
+      event.stopPropagation()
       event.preventDefault()
       return false
     }
@@ -51,8 +77,9 @@ class SahajMediaEmbed {
     const fraction = time / this.#audio.duration
     const degrees = fraction * 360
     const radians = (fraction * 2 - 0.5) * Math.PI
+    const date = new Date(time * 1000)
 
-    this.#time.innerText = new Date(time * 1000).toISOString().substring(14, 19)
+    this.#time.innerText = `${date.getMinutes()}:${date.getSeconds().toString().padStart(2, '0')}`
     this.#track.style = `background-image: conic-gradient(#1E6C71 ${degrees}deg, transparent ${degrees}deg)`
     this.#marker.style.left = `calc(50% + ${50 * Math.cos(radians)}% - 4px)`
     this.#marker.style.top = `calc(50% + ${50 * Math.sin(radians)}% - 4px)`

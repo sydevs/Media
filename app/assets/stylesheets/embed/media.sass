@@ -12,17 +12,17 @@ $color-faded: #757575
   @media only screen and (orientation: landscape)
     @content
 
-@mixin hidden-while($state, $delay: 0s)
+@mixin hidden-while($state, $speed: 1s, $delay: 0s)
   opacity: 1 !important
-  transition: opacity 1s ease-in
+  transition: opacity $speed ease-in
   transition-delay: $delay
 
   #sym-container[data-state="#{$state}"] &
     opacity: 0 !important
 
-@mixin visible-while($state, $delay: 0s)
+@mixin visible-while($state, $speed: 1s, $delay: 0s)
   opacity: 0 !important
-  transition: opacity 1s ease-in
+  transition: opacity $speed ease-in
   transition-delay: $delay
 
   #sym-container[data-state=#{$state}] &
@@ -130,6 +130,7 @@ body
       box-sizing: border-box
       background: transparentize(#a3a3a3, 0.9)
       padding: 10px
+      z-index: 200
 
     &__title
       flex-grow: 1
@@ -208,7 +209,6 @@ body
       box-sizing: border-box
       border-radius: 100%
       border-image: conic-gradient($color-deep 0deg, transparent 0deg)
-      transition: border-image 0.5s
 
     &__image
       position: absolute
@@ -262,7 +262,6 @@ body
       border-radius: 100%
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.1)
       opacity: 0
-      transition: opacity 0.5s
 
     &__time
       position: absolute
@@ -275,6 +274,28 @@ body
       @include landscape
         top: calc(104%)
         
+    &__toggle
+      position: absolute
+      top: 50%
+      left: 50%
+      width: 15.7%
+      height: 15.7%
+      transform: translateX(-50%) translateY(-50%)
+
+      background: white
+      border-radius: 100%
+      box-shadow: 0px 4px 4px transparentize(black, 0.75)
+
+    &__play,
+    &__pause
+      position: absolute
+      top: 50%
+      left: 50%
+      max-width: 50%
+      transform: translateX(-50%) translateY(-50%)
+    
+    &__play
+      left: 52%
 
 
   // ===== FOOTER ===== //
@@ -321,6 +342,7 @@ body
 
   // AUDIO TEST
   audio
+    display: none
     position: absolute
     left: 50%
     bottom: -70px
@@ -341,8 +363,15 @@ body
 .sym-media__time,
 .sym-footer__title,
 .sym-footer__subtitle
-  @include hidden-while(playing, 1s)
-  @include hidden-while(intro, 1s)
+  @include hidden-while(playing, 0.4s)
+  @include hidden-while(intro, 0.4s)
+
+.sym-media__toggle
+  @include hidden-while(playing, 0.25s, 0.5s)
+
+#sym-container[data-state=playing] .sym-media__play,
+#sym-container[data-state=paused] .sym-media__pause
+  display: none
 
 /*.sym-footer__favourite
   @include hidden-while(playing, 1s)

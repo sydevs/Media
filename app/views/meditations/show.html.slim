@@ -25,7 +25,10 @@
           img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
     .sym-media__marker id='sym-marker'
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
-    .sym-media__time id='sym-time' 4:28
+    .sym-media__time id='sym-time' 0:00
+    .sym-media__toggle
+      img.sym-media__play src=image_url('graphics/play.svg')
+      img.sym-media__pause src=image_url('graphics/pause.svg')
 
   .sym-footer
     .sym-footer__title Delving Deeper
