@@ -32,6 +32,6 @@ test:
 
 production:
   <<: *default
-  database: Meditations_production
-  username: Meditations
+  database: Media_production
+  username: Media
   password: <%= ENV["MEDIA_DATABASE_PASSWORD"] %>
