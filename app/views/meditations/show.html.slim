@@ -1,5 +1,12 @@
 
-.sym-container
+#sym-container data-state='intro'
+  .sym-intro
+    img.sym-intro__lotus src=image_url('graphics/lotus.svg')
+    .sym-intro__steps
+      em find a quiet place
+      em take a breath
+      a id="sym-begin" href="#playing" begin
+
   .sym-header
     .sym-header__back
       img src=image_url('graphics/arrow.svg')
@@ -29,4 +36,4 @@
       .sym-footer__volume
         img src=image_url('graphics/audio.svg')
 
-  audio id='sym-audio' src=url_for(@meditation.audio) controls=true
+  audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true

@@ -1,6 +1,7 @@
 
 class SahajMediaEmbed {
 
+  #container
   #audio
   #images
   #time
@@ -9,6 +10,7 @@ class SahajMediaEmbed {
   #activeImage
 
   constructor() {
+    this.#container = document.getElementById('sym-container')
     this.#audio = document.getElementById('sym-audio')
     this.#images = document.getElementById('sym-images').childNodes
     this.#time = document.getElementById('sym-time')
@@ -19,6 +21,13 @@ class SahajMediaEmbed {
     this.#audio.ontimeupdate = () => {
       this.updateTime()
       this.updateImage()
+    }
+
+    document.getElementById('sym-begin').onclick = (event) => {
+      this.#container.dataset.state = 'playing'
+      this.#audio.play()
+      event.preventDefault()
+      return false
     }
   }
 
