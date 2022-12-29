@@ -23,7 +23,7 @@ end
   meditation.save!
 
   seconds = 0
-  40.times.each do |index|
+  300.times.each do |index|
     meditation.keyframes.create!(frame: frames.sample, seconds: seconds)
     seconds += 3 + rand(5)
   end
