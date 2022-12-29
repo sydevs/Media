@@ -16,8 +16,8 @@
       .sym-media__image-stack
         - @meditation.keyframes.each_with_index do |keyframe, index|
           img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
-    img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__marker
+    img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__time 4:28
 
     .sym-footer
