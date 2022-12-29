@@ -31,6 +31,9 @@ gem 'dotenv'
 gem 'jsbundling-rails' # Javascript bundling
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 
+# Development
+gem 'better_errors' # Better errors
+
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
