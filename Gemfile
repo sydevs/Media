@@ -28,7 +28,6 @@ gem 'httparty'
 gem 'dotenv'
 
 # Frontend
-gem 'jsbundling-rails' # Javascript bundling
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 
 # Development
