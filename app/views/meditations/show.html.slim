@@ -1,0 +1,32 @@
+
+.sym-container
+  .sym-header
+    .sym-header__back
+      img src=image_url('graphics/arrow.svg')
+    .sym-header__title
+      | MEDITATION
+    .sym-header__founder
+      img src=image_url('shri-mataji/shri-mataji.jpg')
+      strong Shri Mataji Nirmala Devi
+      em founder
+
+  .sym-media
+    .sym-media__track
+    .sym-media__image
+      .sym-media__image-stack
+        - @meditation.keyframes.each_with_index do |keyframe, index|
+          img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
+    img.sym-media__leaf src=image_url('graphics/leaf.svg')
+    .sym-media__marker
+    .sym-media__time 4:28
+
+    .sym-footer
+      .sym-footer__title Delving Deeper
+      .sym-footer__subtitle All pervading power
+      .sym-footer__actions
+        .sym-footer__favourite
+          img src=image_url('graphics/heart.svg')
+        .sym-footer__volume
+          img src=image_url('graphics/audio.svg')
+
+  audio src=url_for(@meditation.audio) controls=true

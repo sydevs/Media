@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '3.1.2'
+ruby '3.1.3'
 
 # Core gems
-gem 'rails', '~> 7.0.3' # Rails itself
+gem 'rails', '~> 7.0.4' # Rails itself
 gem 'sprockets-rails' # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem 'pg', '~> 1.1' # Use postgresql as the database for Active Record
 gem 'puma', '~> 5.0' # Use the Puma web server [https://github.com/puma/puma]
@@ -26,6 +26,10 @@ gem 'bootsnap', require: false # Reduces boot times through caching; required in
 # API
 gem 'httparty'
 gem 'dotenv'
+
+# Frontend
+gem 'jsbundling-rails' # Javascript bundling
+gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 
 
 group :development, :test do
