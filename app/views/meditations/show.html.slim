@@ -11,14 +11,14 @@
       em founder
 
   .sym-media
-    .sym-media__track
+    .sym-media__track id='sym-track'
     .sym-media__image
-      .sym-media__image-stack
+      .sym-media__image-stack id='sym-images'
         - @meditation.keyframes.each_with_index do |keyframe, index|
           img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
-    .sym-media__marker
+    .sym-media__marker id='sym-marker'
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
-    .sym-media__time 4:28
+    .sym-media__time id='sym-time' 4:28
 
     .sym-footer
       .sym-footer__title Delving Deeper
@@ -29,4 +29,4 @@
         .sym-footer__volume
           img src=image_url('graphics/audio.svg')
 
-  audio src=url_for(@meditation.audio) controls=true
+  audio id='sym-audio' src=url_for(@meditation.audio) controls=true

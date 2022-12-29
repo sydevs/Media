@@ -1,40 +1,62 @@
 
 class SahajMediaEmbed {
 
+  #audio
+  #images
+  #time
+  #track
+  #marker
+  #activeImage
+
   constructor() {
-    console.log('sahaj media init')
-    const audio = document.querySelector('audio')
-    const images = document.querySelectorAll('.sym-media__image-stack > img')
-    const time = document.querySelector('.sym-media__time')
-    const track = document.querySelector('.sym-media__track')
-    const marker = document.querySelector('.sym-media__marker')
+    this.#audio = document.getElementById('sym-audio')
+    this.#images = document.getElementById('sym-images').childNodes
+    this.#time = document.getElementById('sym-time')
+    this.#track = document.getElementById('sym-track')
+    this.#marker = document.getElementById('sym-marker')
+    this.#activeImage = this.#images[0]
 
-    let activeImage = images[0]
+    this.#audio.ontimeupdate = () => {
+      this.updateTime()
+      this.updateImage()
+    }
+  }
 
-    audio.ontimeupdate = function() {
-      const fraction = audio.currentTime / audio.duration
-      const degrees = fraction * 360
-      const radians = (fraction * 2 - 0.5) * Math.PI
-      let newImage = null
-      time.innerText = new Date(audio.currentTime * 1000).toISOString().substring(14, 19)
-      track.style = `background-image: conic-gradient(#1E6C71 ${degrees}deg, transparent ${degrees}deg)`
-      marker.style.left = `calc(50% + ${50 * Math.cos(radians)}% - 4px)`
-      marker.style.top = `calc(50% + ${50 * Math.sin(radians)}% - 4px)`
-      marker.style.opacity = fraction > 0.995 ? 0 : 1
+  updateTime() {
+    const time = this.#audio.currentTime
+    const fraction = time / this.#audio.duration
+    const degrees = fraction * 360
+    const radians = (fraction * 2 - 0.5) * Math.PI
 
-      for (let i in images) {
-        if (!newImage || Number(images[i].dataset.seconds) < audio.currentTime) {
-          newImage = images[i]
-        } else {
-          break
-        }
+    this.#time.innerText = new Date(time * 1000).toISOString().substring(14, 19)
+    this.#track.style = `background-image: conic-gradient(#1E6C71 ${degrees}deg, transparent ${degrees}deg)`
+    this.#marker.style.left = `calc(50% + ${50 * Math.cos(radians)}% - 4px)`
+    this.#marker.style.top = `calc(50% + ${50 * Math.sin(radians)}% - 4px)`
+    this.#marker.style.opacity = fraction > 0.995 ? 0 : 1
+  }
+
+  updateImage() {
+    const time = this.#audio.currentTime
+    let newImage = null
+
+    /*for (let i in this.#images) {
+      if (!newImage || Number(this.#images[i].dataset.seconds) < time) {
+        newImage = this.#images[i]
+      } else {
+        break
       }
+    }*/
 
-      if (activeImage != newImage) {
-        activeImage.classList.remove('active')
-        newImage.classList.add('active')
-        activeImage = newImage
-      }
+    let nextImage = this.#activeImage.nextSibling
+    console.log('check', time, '>=', Number(nextImage.dataset.seconds), time >= Number(nextImage.dataset.seconds))
+    if (time >= Number(nextImage.dataset.seconds)) {
+      newImage = nextImage
+    }
+
+    if (newImage && this.#activeImage != newImage) {
+      this.#activeImage.classList.remove('active')
+      newImage.classList.add('active')
+      this.#activeImage = newImage
     }
   }
 
