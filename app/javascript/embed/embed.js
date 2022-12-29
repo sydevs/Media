@@ -63,7 +63,7 @@ class SahajMediaEmbed {
   }
 
   waitForPreloading() {
-    const loading = Array.from(this.#images).slice(0, 5).map(waitForImageLoad)
+    const loading = Array.from(this.#images).slice(0, 3).map(waitForImageLoad)
     loading.push(waitForMediaLoad(this.#audio))
     Promise.all(loading).then(() => {
       this.#container.dataset.preloading = 'false'

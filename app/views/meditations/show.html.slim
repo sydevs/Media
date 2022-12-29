@@ -1,4 +1,10 @@
 
+- content_for :head do
+  link rel='preload' as='audio' href=image_url("prototype/#{@meditation.audio.filename}")
+
+  - @meditation.keyframes.first(3).each do |keyframe|
+    link rel='preload' as='image' href=image_url("prototype/keyframes/#{keyframe.image.filename}")
+
 #sym-container data-state='intro' data-preloading='true'
   .sym-intro
     img.sym-intro__lotus src=image_url('graphics/lotus.svg')
@@ -40,4 +46,5 @@
       .sym-footer__volume
         img src=image_url('graphics/audio.svg')
 
-  audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
+  /audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
+  audio id='sym-audio' preload=true src=image_url("prototype/#{@meditation.audio.filename}") controls=true
