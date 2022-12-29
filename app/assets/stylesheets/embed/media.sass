@@ -105,14 +105,15 @@ body
       align-items: center
       gap: 14px
 
-      > a
-        font-weight: 500
-        text-decoration: none
-        color: $color-deep
-
       @for $i from 1 to 4
         > *:nth-child(#{$i})
-          animation: hidden #{2 * $i}s, fadein 2s ease-in-out #{2 * $i}s
+          $delay: 2 * ($i - 1)
+          animation: hidden #{$delay}s, fadein 2s ease-in-out #{$delay}s
+
+    &__begin
+      font-weight: 500
+      text-decoration: none
+      color: $color-deep
 
 
   // ===== HEADER ===== //
@@ -341,7 +342,12 @@ body
 .sym-footer__title,
 .sym-footer__subtitle
   @include hidden-while(playing, 1s)
+  @include hidden-while(intro, 1s)
 
 /*.sym-footer__favourite
   @include hidden-while(playing, 1s)
   */
+
+#sym-container[data-preloading=true]
+  .sym-intro__begin
+    opacity: 0 !important

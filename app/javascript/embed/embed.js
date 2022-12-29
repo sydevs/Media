@@ -7,6 +7,7 @@ class SahajMediaEmbed {
   #time
   #track
   #marker
+  #begin
   #activeImage
 
   constructor() {
@@ -23,12 +24,26 @@ class SahajMediaEmbed {
       this.updateImage()
     }
 
-    document.getElementById('sym-begin').onclick = (event) => {
+    this.#begin = document.getElementById('sym-begin')
+    this.#begin.onclick = (event) => {
       this.#container.dataset.state = 'playing'
       this.#audio.play()
+      setTimeout(() => this.#begin.remove(), 1000)
       event.preventDefault()
       return false
     }
+
+    this.waitForPreloading()
+  }
+
+  waitForPreloading() {
+    const loading = Array.from(this.#images).slice(0, 5).map(waitForImageLoad)
+    loading.push(waitForMediaLoad(this.#audio))
+    Promise.all(loading).then(() => {
+      this.#container.dataset.preloading = 'false'
+    }).catch(error => {
+      console.log(error)
+    })
   }
 
   updateTime() {
@@ -57,7 +72,6 @@ class SahajMediaEmbed {
     }*/
 
     let nextImage = this.#activeImage.nextSibling
-    console.log('check', time, '>=', Number(nextImage.dataset.seconds), time >= Number(nextImage.dataset.seconds))
     if (time >= Number(nextImage.dataset.seconds)) {
       newImage = nextImage
     }
@@ -69,6 +83,28 @@ class SahajMediaEmbed {
     }
   }
 
+}
+
+function waitForImageLoad(img) {
+  if (img.complete) {
+    return Promise.resolve()
+  }
+
+  return new Promise((resolve, reject) => {
+    img.onload = () => resolve()
+    img.onerror = error => reject(error)
+  });
+}
+
+function waitForMediaLoad(media) {
+  if (media.readyState == HTMLMediaElement.HAVE_ENOUGH_DATA) {
+    return Promise.resolve()
+  }
+
+  return new Promise((resolve, reject) => {
+    media.oncanplay = () => resolve()
+    media.onerror = error => reject(error)
+  })
 }
 
 document.addEventListener('DOMContentLoaded', function() {
