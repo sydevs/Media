@@ -22,7 +22,8 @@
     .sym-media__image
       .sym-media__image-stack id='sym-images'
         - @meditation.keyframes.each_with_index do |keyframe, index|
-          img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
+          /img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
+          img class=('active' if index.zero?) src=image_url("prototype/keyframes/#{keyframe.image.filename}") data-seconds=keyframe.seconds
     .sym-media__marker id='sym-marker'
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__time id='sym-time' 0:00
