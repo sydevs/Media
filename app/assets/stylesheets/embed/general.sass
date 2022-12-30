@@ -43,10 +43,42 @@ body
     max-height: 100%
     max-width: 100%
 
+// ===== ERROR ===== //
+#sym-container
+  .sym-error
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 500
+    background: white
+    text-align: center
+    padding-bottom: 15%
+
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 16px
+
+    > span
+      color: transparentize(darkred, 0.6)
+      max-width: 200px
+      padding: 0 10px
+      line-height: 150%
+
+    > svg
+      opacity: 0.6
+
 
 // ===== VISIBILITY ===== //
+.sym-error
+  @include visible-while(error)
+
 .sym-intro
   @include visible-while(intro)
+  @include visible-while(error)
 
 .sym-media,
 .sym-footer

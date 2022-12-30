@@ -34,7 +34,8 @@ class SahajMediaEmbed {
     this.preloader.waitForPreloading().then(() => {
       this.#container.dataset.preloading = 'false'
     }).catch(error => {
-      console.log(error)
+      this.state = 'error'
+      console.error(error)
     })
 
     this.visualizer = new SahajMediaVisualizer(window.sym.keyframes, this.#frames, this.#audio)
