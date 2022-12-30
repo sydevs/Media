@@ -29,6 +29,7 @@ gem 'dotenv'
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
+gem 'inline_svg' # Inline svg
 
 # Development
 gem 'better_errors' # Better errors

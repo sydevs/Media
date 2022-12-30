@@ -15,12 +15,12 @@
     .sym-intro__loader
       .sym-intro__loading
       .sym-intro__alert
-        img src=image_url('graphics/alert.svg')
+        = inline_svg_tag('graphics/alert.svg')
         span Slow internet connection!
 
   .sym-header
     .sym-header__back
-      img src=image_url('graphics/arrow.svg')
+      = inline_svg_tag('graphics/arrow.svg')
     .sym-header__title
       | MEDITATION
     .sym-header__founder
@@ -39,17 +39,17 @@
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__time id='sym-time' 0:00
     .sym-media__toggle
-      img.sym-media__play src=image_url('graphics/play.svg')
-      img.sym-media__pause src=image_url('graphics/pause.svg')
+      = inline_svg_tag('graphics/play.svg', class: 'sym-media__play')
+      = inline_svg_tag('graphics/pause.svg', class: 'sym-media__pause')
 
   .sym-footer
     .sym-footer__title Delving Deeper
     .sym-footer__subtitle All pervading power
     .sym-footer__actions
       .sym-footer__favourite
-        img src=image_url('graphics/heart.svg')
+        = inline_svg_tag('graphics/heart.svg')
       .sym-footer__volume
-        img src=image_url('graphics/audio.svg')
+        = inline_svg_tag('graphics/audio.svg')
 
   /audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
   audio id='sym-audio' preload=true src=image_url("prototype/#{@meditation.audio.filename}") controls=true
