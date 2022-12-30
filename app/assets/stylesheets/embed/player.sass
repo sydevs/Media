@@ -95,7 +95,7 @@
       border-radius: 100%
       border-image: conic-gradient($color-deep 0deg, transparent 0deg)
 
-    &__image
+    &__frame
       position: absolute
       height: calc(100% - 2px)
       width: calc(100% - 2px)
@@ -109,11 +109,11 @@
       justify-content: center
       background: white
 
-    &__image-stack
+    &__frame-stack
       display: grid
       position: relative
 
-      img
+      > *
         grid-column: 1
         grid-row: 1
         height: 90%
@@ -123,8 +123,8 @@
         transition: opacity 1s ease-in-out
         opacity: 0
 
-      img.active
-        opacity: 1
+        &.active
+          opacity: 1
 
     &__leaf
       $height: 6%

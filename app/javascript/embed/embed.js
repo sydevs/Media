@@ -8,7 +8,7 @@ class SahajMediaEmbed {
 
   #container
   #audio
-  #images
+  #frames
   #time
   #track
   #marker
@@ -25,24 +25,24 @@ class SahajMediaEmbed {
   constructor() {
     this.#container = document.getElementById('sym-container')
     this.#audio = document.getElementById('sym-audio')
-    this.#images = document.getElementById('sym-images').childNodes
+    this.#frames = document.getElementById('sym-images').childNodes
     this.#time = document.getElementById('sym-time')
     this.#track = document.getElementById('sym-track')
     this.#marker = document.getElementById('sym-marker')
 
-    this.preloader = new SahajMediaPreloader(this.#images, this.#audio, 5)
+    this.preloader = new SahajMediaPreloader(this.#frames, this.#audio, 5)
     this.preloader.waitForPreloading().then(() => {
       this.#container.dataset.preloading = 'false'
     }).catch(error => {
       console.log(error)
     })
 
-    this.visualizer = new SahajMediaVisualizer(window.sym.keyframes, this.#images, this.#audio)
+    this.visualizer = new SahajMediaVisualizer(window.sym.keyframes, this.#frames, this.#audio)
 
     this.#begin = document.getElementById('sym-begin')
     this.#begin.onclick = event => {
       this.state = 'playing'
-      this.#audio.play()
+      this.setPaused(false)
       setTimeout(() => this.#begin.remove(), 1000)
       event.stopPropagation()
       event.preventDefault()
@@ -52,12 +52,8 @@ class SahajMediaEmbed {
     this.#container.onclick = event => {
       if (this.state == 'intro') {
         return
-      } else if (this.state == 'paused') {
-        this.#audio.play()
-        this.state = 'playing'
       } else {
-        this.#audio.pause()
-        this.state = 'paused'
+        this.setPaused(this.state == 'playing')
       }
 
       this.updateTime()
@@ -79,6 +75,18 @@ class SahajMediaEmbed {
     this.#marker.style.left = `calc(50% + ${50 * Math.cos(radians)}% - 4px)`
     this.#marker.style.top = `calc(50% + ${50 * Math.sin(radians)}% - 4px)`
     this.#marker.style.opacity = fraction > 0.995 ? 0 : 1
+  }
+
+  setPaused(paused = true) {
+    if (paused) {
+      this.#audio.pause()
+      this.state = 'paused'
+    } else {
+      this.#audio.play()
+      this.state = 'playing'
+    }
+
+    this.visualizer.setPaused(paused)
   }
 
 }

@@ -26,20 +26,38 @@ class SahajMediaVisualizer {
       this.#frames[frame.dataset.id] = frame
     })
 
-    audio.ontimeupdate = () => this.updateImage()
+    audio.ontimeupdate = () => this.updateFrame()
   }
 
-  updateImage(img) {
+  setPaused(paused = true) {
+    if (this.#activeFrame.tagName != 'VIDEO')
+      return
+
+    if (paused)
+      this.#activeFrame.pause()
+    else
+      this.#activeFrame.play()
+  }
+
+  updateFrame() {
     const time = this.#audio.currentTime
     const nextKeyframe = this.nextKeyframe
 
     if (time >= nextKeyframe.seconds) {
-      const newFrame = this.#frames[nextKeyframe.frame_id]
-      this.#activeFrame.classList.remove('active')
-      newFrame.classList.add('active')
-      this.#activeFrame = newFrame
+      this.showFrame(this.#frames[nextKeyframe.frame_id])
       this.#currentId += 1
     }
+  }
+
+  showFrame(frame) {
+    if (frame.tagName == 'VIDEO') {
+      frame.currentTime = 0
+      frame.play()
+    }
+
+    this.#activeFrame.classList.remove('active')
+    frame.classList.add('active')
+    this.#activeFrame = frame
   }
 }
 

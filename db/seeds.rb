@@ -1,13 +1,14 @@
 
 frame_images = Dir.glob('app/assets/images/prototype/images/*.webp')
-frames = frame_images.each_with_index.map do |image, index|
+frame_images = frame_images.concat Dir.glob('app/assets/images/prototype/videos/*.webm')
+frames = frame_images.each_with_index.map do |file, index|
   frame = Frame.find_by_id(index) || Frame.new
-  filename = image.split('/').last
+  filename = file.split('/').last
   parts = filename.split('.').first.split(', ')
   frame.title = parts[1]
   frame.tags = parts.drop(2)
-  frame.image.attach(io: File.open(image), filename: filename)
-  puts "Creating frame - #{frame.title}"
+  frame.media.attach(io: File.open(file), filename: filename)
+  puts "Creating frame - #{filename}"
   frame.save!
   frame
 end
@@ -24,8 +25,9 @@ end
 
   seconds = 0
   180.times.each do |index|
+    frame = frames.sample
     meditation.keyframes.create!(frame: frames.sample, seconds: seconds)
-    seconds += 3 + rand(5)
+    seconds += (frame.video? ? 6 : 3) + rand(5)
   end
 
   puts "Created #{meditation.keyframes.count} frames with duration #{seconds}"
