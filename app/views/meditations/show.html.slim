@@ -50,8 +50,8 @@
       .sym-footer__volume
         = inline_svg_tag('graphics/audio.svg')
 
-  /audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
-  audio id='sym-audio' preload=true src=image_url("prototype/audio/#{@meditation.audio.filename}") controls=true
+  /audio id='sym-audio' preload='auto' src=url_for(@meditation.audio) controls=true
+  audio id='sym-audio' preload='auto' src=image_url("prototype/audio/#{@meditation.audio.filename}") controls=true
 
 javascript:
   window.sym = {

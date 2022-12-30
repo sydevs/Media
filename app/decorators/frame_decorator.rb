@@ -15,7 +15,7 @@ module FrameDecorator
     end
 
     if video?
-      attributes.merge!(muted: true, loop: true)
+      attributes.merge!(muted: true, loop: true, preload: 'auto')
     end
 
     attributes['data-id'] = id
