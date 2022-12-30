@@ -1,6 +1,6 @@
 
 - content_for :head do
-  link rel='preload' as='audio' href=image_url("prototype/#{@meditation.audio.filename}")
+  link rel='preload' as='audio' href=image_url("prototype/audio/#{@meditation.audio.filename}")
 
   - @meditation.keyframes.first(3).each do |keyframe|
     link rel='preload' as='image' href=image_url("prototype/keyframes/#{keyframe.image.filename}")
@@ -34,7 +34,7 @@
       .sym-media__image-stack id='sym-images'
         - @meditation.keyframes.each_with_index do |keyframe, index|
           /img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
-          img class=('active' if index.zero?) src=image_url("prototype/keyframes/#{keyframe.image.filename}") data-seconds=keyframe.seconds
+          img class=('active' if index.zero?) src=image_url("prototype/images/#{keyframe.image.filename}") data-seconds=keyframe.seconds
     .sym-media__marker id='sym-marker'
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__time id='sym-time' 0:00
@@ -52,4 +52,4 @@
         = inline_svg_tag('graphics/audio.svg')
 
   /audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
-  audio id='sym-audio' preload=true src=image_url("prototype/#{@meditation.audio.filename}") controls=true
+  audio id='sym-audio' preload=true src=image_url("prototype/audio/#{@meditation.audio.filename}") controls=true

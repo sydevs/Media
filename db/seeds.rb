@@ -1,5 +1,5 @@
 
-frame_images = Dir.glob('app/assets/images/prototype/keyframes/*.webp')
+frame_images = Dir.glob('app/assets/images/prototype/images/*.webp')
 frames = frame_images.each_with_index.map do |image, index|
   frame = Frame.find_by_id(index) || Frame.new
   filename = image.split('/').last
@@ -15,7 +15,7 @@ end
 100.times.each do |index|
   meditation = Meditation.find_by_id(index) || Meditation.new
   meditation.title = "Meditation #{index}"
-  meditation.audio.attach(io: File.open('app/assets/images/prototype/audio.mp3'), filename: 'audio.mp3')
+  meditation.audio.attach(io: File.open('app/assets/images/prototype/audio/audio.webm'), filename: 'audio.webm')
   meditation.duration = 482
   meditation.keyframes.destroy_all
 
@@ -23,7 +23,7 @@ end
   meditation.save!
 
   seconds = 0
-  300.times.each do |index|
+  180.times.each do |index|
     meditation.keyframes.create!(frame: frames.sample, seconds: seconds)
     seconds += 3 + rand(5)
   end
