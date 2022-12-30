@@ -1,0 +1,113 @@
+@import './_mixins'
+
+@keyframes hidden
+  0%
+    opacity: 0
+  100%
+    opacity: 0
+
+@keyframes fadein
+  0%
+    opacity: 0
+  100%
+    opacity: 1
+
+@keyframes pulsein
+  0%
+    opacity: 0
+  50%
+    opacity: 1
+  100%
+    opacity: 0.5
+
+@keyframes dot-flashing
+  0%
+    background-color: $color-deep
+  
+  50%, 100%
+    background-color: transparentize($color-deep, 0.8)
+
+// ===== INTRO ===== //
+#sym-container .sym-intro
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 100
+  background: white
+  text-align: center
+
+  display: flex
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  gap: 24px
+
+  &__lotus
+    opacity: 0.5
+
+  &__steps
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 14px
+
+    @for $i from 1 to 4
+      $delay: 2 * ($i - 1)
+      > *:nth-child(#{$i})
+        animation: hidden #{$delay}s, fadein 2s ease-in-out #{$delay}s
+
+  &__begin
+    font-weight: 500
+    text-decoration: none
+    color: $color-deep
+
+  &__loader
+    animation: hidden 7s, fadein 1s ease-in-out 7s
+
+  &__loading,
+  &__loading::before,
+  &__loading::after
+    width: 10px
+    height: 10px
+    border-radius: 5px
+    background-color: $color-deep
+    color: $color-deep
+    animation: dot-flashing 1s infinite linear alternate
+
+  &__loading
+    position: relative
+    animation-delay: 0.25s
+    margin: 16px auto
+  
+    &::before,
+    &::after
+      content: ""
+      display: block
+      position: absolute
+      top: 0
+  
+    &::before
+      left: -15px
+      animation-delay: 0s
+  
+    &::after
+      left: 15px
+      animation-delay: 0.5s
+
+  &__loader
+    opacity: 1
+    transition: opacity 0.25s
+
+  &__alert
+    opacity: 0.5
+    font-size: 13px
+    animation: hidden 14s, pulsein 1.5s ease-in-out 14s
+
+    > img
+      height: 1em
+      vertical-align: text-top
+      display: block
+      margin: 8px auto

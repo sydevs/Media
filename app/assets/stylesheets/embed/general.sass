@@ -1,0 +1,70 @@
+@import './_mixins'
+
+body
+  margin: 0
+
+*
+  box-sizing: border-box
+
+#sym-container
+  width: 100vw
+  height: 100vh
+  margin: auto
+  position: relative
+
+  outline: 1px solid lightgray
+
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
+  //background: radial-gradient(circle closest-side at 50% 52%, transparentize($color-light, 0.1) 52.08%, white 200%)
+  //background: radial-gradient(circle 180px at 50% 52%, transparentize($color-light, 0.1) 52.08%, white 200%)
+
+  color: $color-gray
+  font-family: "Raleway", sans-serif
+
+  @include portrait
+    max-width: 500px
+    max-height: 900px
+    background: linear-gradient(180deg, white 25%, transparentize($color-light, 0.1) 52.08%, white 75%)
+
+  @include landscape
+    max-width: 900px
+    max-height: 500px
+    background: linear-gradient(90deg, white 30%, transparentize($color-light, 0.1) 57.08%, white 80%)
+    //background: radial-gradient(circle 180px at 55% 48%, transparentize($color-light, 0.1) 52.08%, white 200%)
+
+
+// ===== VISIBILITY ===== //
+.sym-intro
+  @include visible-while(intro)
+
+.sym-media,
+.sym-footer
+  @include hidden-while(intro)
+
+.sym-header__title,
+.sym-media__track,
+.sym-media__marker,
+.sym-media__leaf,
+.sym-media__time,
+.sym-footer__title,
+.sym-footer__subtitle //.sym-footer__favourite
+  @include hidden-while(playing, 0.4s)
+  @include hidden-while(intro, 0.4s)
+
+.sym-media__toggle
+  @include hidden-while(playing, 0.25s, 0.5s)
+
+#sym-container[data-state=playing] .sym-media__play,
+#sym-container[data-state=paused] .sym-media__pause
+  display: none
+
+#sym-container[data-preloading=true]
+  .sym-intro__begin
+    opacity: 0 !important
+
+#sym-container[data-preloading=false]
+  .sym-intro__loader
+    opacity: 0 !important

@@ -1,0 +1,29 @@
+
+$color-deep: #1E6C71
+$color-light: #C5E0DC
+$color-gray: #535353
+$color-faded: #757575
+
+@mixin portrait
+  @media only screen and (orientation: portrait)
+    @content
+
+@mixin landscape
+  @media only screen and (orientation: landscape)
+    @content
+
+@mixin hidden-while($state, $speed: 1s, $delay: 0s)
+  opacity: 1 !important
+  transition: opacity $speed ease-in
+  transition-delay: $delay
+
+  #sym-container[data-state="#{$state}"] &
+    opacity: 0 !important
+
+@mixin visible-while($state, $speed: 1s, $delay: 0s)
+  opacity: 0 !important
+  transition: opacity $speed ease-in
+  transition-delay: $delay
+
+  #sym-container[data-state=#{$state}] &
+    opacity: 1 !important
