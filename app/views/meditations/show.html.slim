@@ -7,7 +7,7 @@
 
 #sym-container data-state='intro' data-preloading='true'
   .sym-intro
-    img.sym-intro__lotus src=image_url('graphics/lotus.svg')
+    = inline_svg_tag('graphics/lotus.svg', class: 'sym-intro__lotus')
     .sym-intro__steps
       em find a quiet place
       em take a breath
