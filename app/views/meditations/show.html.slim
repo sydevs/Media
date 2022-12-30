@@ -2,8 +2,8 @@
 - content_for :head do
   link rel='preload' as='audio' href=image_url("prototype/audio/#{@meditation.audio.filename}")
 
-  - @meditation.keyframes.first(3).each do |keyframe|
-    link rel='preload' as='image' href=image_url("prototype/keyframes/#{keyframe.image.filename}")
+  - @frames.first(@preload_count).each do |frame|
+    link rel='preload' as='image' href=frame[:url]
 
 #sym-container data-state='intro' data-preloading='true'
   .sym-intro
@@ -32,7 +32,12 @@
     .sym-media__track id='sym-track'
     .sym-media__image
       .sym-media__image-stack id='sym-images'
-        - @meditation.keyframes.each_with_index do |keyframe, index|
+        - @frames.each_with_index do |frame, index|
+          - if index < @preload_count
+            img id="sym-frame-#{frame[:id]}" data-id=frame[:id] class=('active' if index.zero?) src=frame[:url]
+          - else
+            img id="sym-frame-#{frame[:id]}" data-id=frame[:id] data-src=frame[:url]
+        /- @meditation.keyframes.each_with_index do |keyframe, index|
           /img class=('active' if index.zero?) src=url_for(keyframe.image) data-seconds=keyframe.seconds
           img class=('active' if index.zero?) src=image_url("prototype/images/#{keyframe.image.filename}") data-seconds=keyframe.seconds
     .sym-media__marker id='sym-marker'
@@ -53,3 +58,11 @@
 
   /audio id='sym-audio' preload=true src=url_for(@meditation.audio) controls=true
   audio id='sym-audio' preload=true src=image_url("prototype/audio/#{@meditation.audio.filename}") controls=true
+
+javascript:
+  window.sym = {
+    frames: JSON.parse('#{@frames.to_json.html_safe}'),
+    keyframes: JSON.parse('#{@keyframes.to_json.html_safe}'),
+  }
+
+  console.log(window.sym)

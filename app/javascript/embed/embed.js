@@ -1,5 +1,10 @@
+import SahajMediaPreloader from "embed/preloader"
+import SahajMediaVisualizer from "embed/visualizer"
 
 class SahajMediaEmbed {
+
+  preloader = null
+  visualizer = null
 
   #container
   #audio
@@ -8,7 +13,6 @@ class SahajMediaEmbed {
   #track
   #marker
   #begin
-  #activeImage
 
   get state() {
     return this.#container.dataset.state
@@ -25,12 +29,15 @@ class SahajMediaEmbed {
     this.#time = document.getElementById('sym-time')
     this.#track = document.getElementById('sym-track')
     this.#marker = document.getElementById('sym-marker')
-    this.#activeImage = this.#images[0]
 
-    this.#audio.ontimeupdate = () => {
-      //this.updateTime()
-      this.updateImage()
-    }
+    this.preloader = new SahajMediaPreloader(this.#images, this.#audio, 5)
+    this.preloader.waitForPreloading().then(() => {
+      this.#container.dataset.preloading = 'false'
+    }).catch(error => {
+      console.log(error)
+    })
+
+    this.visualizer = new SahajMediaVisualizer(window.sym.keyframes, this.#images, this.#audio)
 
     this.#begin = document.getElementById('sym-begin')
     this.#begin.onclick = event => {
@@ -58,18 +65,6 @@ class SahajMediaEmbed {
       event.preventDefault()
       return false
     }
-
-    this.waitForPreloading()
-  }
-
-  waitForPreloading() {
-    const loading = Array.from(this.#images).slice(0, 3).map(waitForImageLoad)
-    loading.push(waitForMediaLoad(this.#audio))
-    Promise.all(loading).then(() => {
-      this.#container.dataset.preloading = 'false'
-    }).catch(error => {
-      console.log(error)
-    })
   }
 
   updateTime() {
@@ -86,52 +81,6 @@ class SahajMediaEmbed {
     this.#marker.style.opacity = fraction > 0.995 ? 0 : 1
   }
 
-  updateImage() {
-    const time = this.#audio.currentTime
-    let newImage = null
-
-    /*for (let i in this.#images) {
-      if (!newImage || Number(this.#images[i].dataset.seconds) < time) {
-        newImage = this.#images[i]
-      } else {
-        break
-      }
-    }*/
-
-    let nextImage = this.#activeImage.nextSibling
-    if (time >= Number(nextImage.dataset.seconds)) {
-      newImage = nextImage
-    }
-
-    if (newImage && this.#activeImage != newImage) {
-      this.#activeImage.classList.remove('active')
-      newImage.classList.add('active')
-      this.#activeImage = newImage
-    }
-  }
-
-}
-
-function waitForImageLoad(img) {
-  if (img.complete) {
-    return Promise.resolve()
-  }
-
-  return new Promise((resolve, reject) => {
-    img.onload = () => resolve()
-    img.onerror = error => reject(error)
-  });
-}
-
-function waitForMediaLoad(media) {
-  if (media.readyState == HTMLMediaElement.HAVE_ENOUGH_DATA) {
-    return Promise.resolve()
-  }
-
-  return new Promise((resolve, reject) => {
-    media.oncanplay = () => resolve()
-    media.onerror = error => reject(error)
-  })
 }
 
 document.addEventListener('DOMContentLoaded', function() {
