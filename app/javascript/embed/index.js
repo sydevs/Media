@@ -23,6 +23,7 @@ class SahajMediaEmbed {
   }
 
   constructor() {
+    console.log('load embedder')
     this.#container = document.getElementById('sym-container')
     this.#audio = document.getElementById('sym-audio')
     this.#frames = document.getElementById('sym-images').childNodes
@@ -30,8 +31,10 @@ class SahajMediaEmbed {
     this.#track = document.getElementById('sym-track')
     this.#marker = document.getElementById('sym-marker')
 
+    console.log('start preloader')
     this.preloader = new SahajMediaPreloader(this.#frames, this.#audio, 5)
     this.preloader.waitForPreloading().then(() => {
+      console.log('preloaded')
       this.#container.dataset.preloading = 'false'
     }).catch(error => {
       this.state = 'error'
@@ -92,8 +95,14 @@ class SahajMediaEmbed {
 
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  console.log('already loaded')
   window.SahajMedia = new SahajMediaEmbed()
-})
+} else {
+  console.log('waiting for load')
+  window.addEventListener("DOMContentLoaded", () => {
+    window.SahajMedia = new SahajMediaEmbed()
+  })
+}
 
 console.log('load embed.js')
