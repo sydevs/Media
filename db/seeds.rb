@@ -13,7 +13,7 @@ frames = frame_images.each_with_index.map do |file, index|
   frame
 end
 
-100.times.each do |index|
+50.times.each do |index|
   meditation = Meditation.find_by_id(index) || Meditation.new
   meditation.title = "Meditation #{index}"
   meditation.audio.attach(io: File.open('app/assets/images/prototype/audio/audio.webm'), filename: 'audio.webm')
