@@ -60,12 +60,11 @@
   // ===== MEDIA ===== //
   .sym-media
     aspect-ratio: 1
-    border-radius: 100%
 
     background: #FFFFFF
     box-sizing: border-box
     border: 1px solid black
-    outline: 3px solid transparentize(white, 0.6)
+    border-radius: 100%
 
     position: absolute
     transform: translateX(-50%) translateY(-50%)  
@@ -82,6 +81,18 @@
       max-height: 100%
       left: 55%
       top: 48%
+
+    &::before
+      $border: 3px
+      content: ''
+      position: absolute
+      top: -#{$border + 1}
+      left: -#{$border + 1}
+      right: -#{$border + 1}
+      bottom: -#{$border + 1}
+
+      border: $border solid transparentize(white, 0.6)
+      border-radius: 100%
 
     &__track
       position: absolute
