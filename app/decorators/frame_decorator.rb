@@ -3,8 +3,11 @@
 module FrameDecorator
 
   def url
-    folder = video? ? 'videos' : 'images'
-    image_url("prototype/#{folder}/#{media.filename}")
+    # folder = video? ? 'videos' : 'images'
+    # image_url("prototype/#{folder}/#{media.filename}")
+    folder = video? ? 'mov' : 'jpg'
+    filename = media.filename.base + '.' + (video? ? 'mov' : 'jpg')
+    image_url("prototype/#{folder}/#{filename}")
   end
 
   def to_html(preload: false, **attributes)

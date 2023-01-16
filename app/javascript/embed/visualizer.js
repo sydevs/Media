@@ -30,7 +30,6 @@ class SahajMediaVisualizer {
   }
 
   setPaused(paused = true) {
-    console.log('setPaused')
     if (this.#activeFrame.tagName != 'VIDEO')
       return
 
@@ -41,7 +40,6 @@ class SahajMediaVisualizer {
   }
 
   updateFrame() {
-    console.log('updateFrame')
     const time = this.#audio.currentTime
     const nextKeyframe = this.nextKeyframe
 
@@ -52,7 +50,6 @@ class SahajMediaVisualizer {
   }
 
   showFrame(frame) {
-    console.log('showFrame', frame)
     if (frame.tagName == 'VIDEO') {
       frame.currentTime = 0
       frame.play()

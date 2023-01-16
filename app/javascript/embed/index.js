@@ -53,18 +53,18 @@ class SahajMediaEmbed {
       return false
     }
 
-    this.#container.onclick = event => {
-      if (this.state == 'intro') {
-        return
-      } else {
-        this.setPaused(this.state == 'playing')
-      }
+    this.#container.onclick = () => this.onClick()
+    this.#container.ontouchend = () => this.onClick()
+  }
 
-      this.updateTime()
-      event.stopPropagation()
-      event.preventDefault()
-      return false
+  onClick() {
+    if (this.state == 'intro') {
+      return
+    } else {
+      this.setPaused(this.state == 'playing')
     }
+
+    this.updateTime()
   }
 
   updateTime() {

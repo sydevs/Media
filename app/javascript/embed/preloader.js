@@ -37,11 +37,14 @@ class SahajMediaPreloader {
 
   waitForPreloading() {
     console.log('wait for preloading')
+    //return Promise.resolve()
     return Promise.all(this.#preloadPromises)
   }
 
   waitForFrameLoad(frame) {
     console.log('wait for frame load')
+    //return Promise.resolve()
+
     if (frame.tagName == 'VIDEO') {
       return this.waitForMediaLoad(frame)
     } else {
@@ -51,6 +54,7 @@ class SahajMediaPreloader {
 
   waitForImageLoad(img) {
     console.log('wait for img load', img.src)
+    //return Promise.resolve()
 
     if (img.complete) {
       console.log('already loaded image', img.src)
@@ -68,6 +72,7 @@ class SahajMediaPreloader {
 
   waitForMediaLoad(media, desiredState = HTMLMediaElement.HAVE_ENOUGH_DATA) {
     console.log('wait for media load', media.src)
+    //return Promise.resolve()
 
     if (media.readyState >= desiredState) {
       console.log('already loaded media', media.src)
