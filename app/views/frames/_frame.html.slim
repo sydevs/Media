@@ -2,9 +2,9 @@
 a.ui.card href=edit_frame_path(frame)
   .image
     - if frame.video?
-      video src=frame.media.url
+      video src=frame.url
     - else
-      img src=frame.media.url
+      img src=frame.url
   .content
     i.right.floated.icon class=(frame.video? ? 'video' : 'image')
     .header = frame.title

@@ -9,6 +9,6 @@
       .three.wide.center.aligned.column
         p = Time.at(keyframe.seconds).utc.strftime("%M:%S")
         - if frame.video?
-          video.ui.small.rounded.image src=frame.media.url
+          video.ui.small.rounded.image src=frame.url
         - else
-          img.ui.small.rounded.image src=frame.media.url
+          img.ui.small.rounded.image src=frame.url
