@@ -36,3 +36,5 @@
 
 # Ignore Mac extra file
 .DS_Store
+
+app/assets/images/prototype/raw
