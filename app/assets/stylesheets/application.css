@@ -12,4 +12,16 @@
  *
  *= require_tree .
  *= require_self
+ *= require semantic-ui
  */
+
+.ui.card .image > video {
+  width: 100%;
+  max-height: 257px;
+  object-fit: cover;
+  border-radius: 0.5em;
+}
+
+.ui.card .header {
+  text-transform: capitalize;
+}

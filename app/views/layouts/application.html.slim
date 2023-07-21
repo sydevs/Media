@@ -1,0 +1,22 @@
+/!DOCTYPE html
+html
+  head
+    title Sahaj Media
+    meta name="viewport" content="width=device-width,initial-scale=1"
+    = csrf_meta_tags
+    = csp_meta_tag
+
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    = javascript_importmap_tags
+
+    = content_for(:head)
+
+  body
+    .ui.hidden.divider
+    .ui.text.container
+      .ui.menu
+        a.item class=('active' if controller_name == 'meditations') href=meditations_path Meditations
+        a.item class=('active' if controller_name == 'frames') href=frames_path Frames
+      
+      .ui.divider
+      = yield

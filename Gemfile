@@ -31,6 +31,8 @@ gem 'active_decorator'
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
 gem 'inline_svg' # Inline svg
+gem 'fomantic-ui-sass' # CSS framework for editor
+gem 'simple_form'
 
 # Development
 gem 'better_errors' # Better errors

@@ -1,0 +1,14 @@
+
+.item
+  .image
+    img src=meditation.thumbnail.url
+  .content
+    .header = meditation.title
+    .meta = "This is a description."
+    .extra
+      a.ui.label href=meditation_path(meditation)
+        i class='eye icon'
+        | View
+      a.ui.label href=edit_meditation_path(meditation)
+        i class='pencil icon'
+        | Edit

@@ -9,7 +9,7 @@ class CreateMeditationTables < ActiveRecord::Migration[7.0]
 
     create_table :frames do |t|
       t.string :title
-      t.string :tags
+      t.string :tags, array: true, default: []
 
       t.timestamps
     end

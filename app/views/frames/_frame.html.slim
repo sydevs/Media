@@ -1,0 +1,11 @@
+
+a.ui.card href=edit_frame_path(frame)
+  .image
+    - if frame.video?
+      video src=frame.media.url
+    - else
+      img src=frame.media.url
+  .content
+    i.right.floated.icon class=(frame.video? ? 'video' : 'image')
+    .header = frame.title
+    .meta = frame.tags.join(', ')
