@@ -27,6 +27,7 @@ gem 'bootsnap', require: false # Reduces boot times through caching; required in
 gem 'httparty'
 gem 'dotenv'
 gem 'active_decorator'
+gem 'google-cloud-storage'
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
