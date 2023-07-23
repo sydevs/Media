@@ -15,7 +15,7 @@ google_dev:
 google:
   service: GCS
   project: sahaj-media
-  credentials: <%= ENV['GOOGLE_APPLICATION_CREDENTIALS'].to_json %>
+  credentials: <%= ENV['GOOGLE_CLOUD_KEYFILE'].to_json %>
   bucket: media.sydevelopers.com
 
 # Use bin/rails credentials:edit to set the AWS secrets (as aws:access_key_id|secret_access_key)
