@@ -13,10 +13,15 @@ frames = frame_images.each_with_index.map do |file, index|
   frame
 end
 
+music = Music.first || Music.new
+music.title = "Sample Music"
+music.audio.attach(io: File.open('app/assets/images/prototype/audio/music.mp3'), filename: 'music.mp3')
+
 10.times.each do |index|
   meditation = Meditation.find_by_id(index) || Meditation.new
   meditation.title = "Meditation #{index}"
   meditation.audio.attach(io: File.open('app/assets/images/prototype/audio/audio.webm'), filename: 'audio.webm')
+  meditation.music = music
   meditation.duration = 482
   meditation.keyframes.destroy_all
 
