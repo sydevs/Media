@@ -1,8 +1,8 @@
 
 json.id @meditation.id
 json.title @meditation.title
-json.audio_url @meditation.audio.url
-json.music_url @meditation.music.audio.url
+json.audio_url @meditation.audio&.url
+json.music_url @meditation.music&.audio&.url
 json.frames @meditation.keyframes.order(seconds: :asc) do |keyframe|
   frame = keyframe.frame
 
