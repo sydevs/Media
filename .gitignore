@@ -37,5 +37,5 @@
 # Ignore Mac extra file
 .DS_Store
 
-/app/assets/images/prototype/raw
+/app/assets/images/proto
 /config/storage.json
