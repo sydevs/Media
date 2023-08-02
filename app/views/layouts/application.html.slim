@@ -12,11 +12,17 @@ html
     = content_for(:head)
 
   body
-    .ui.hidden.divider
-    .ui.text.container
-      .ui.menu
-        a.item class=('active' if controller_name == 'meditations') href=meditations_path Meditations
-        a.item class=('active' if controller_name == 'frames') href=frames_path Frames
+    nav
+      .ui.vertical.labeled.icon.teal.menu
+        .item
+          img.ui.tiny.circular.image src=image_url('logo.svg')
+        a.item class=('active' if controller_name == 'meditations') href=meditations_path
+          i.spa.icon
+          | Meditations
+        a.item class=('active' if controller_name == 'frames') href=frames_path
+          i.film.icon
+          | Frames
       
-      .ui.divider
-      = yield
+    main
+      .ui.container
+        = yield

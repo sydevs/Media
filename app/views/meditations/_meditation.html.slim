@@ -1,14 +1,15 @@
 
-.item
-  .image
-    img src=meditation.thumbnail.url
-  .content
-    .header = meditation.title
-    .meta = "This is a description."
-    .extra
-      a.ui.label href=meditation_path(meditation)
-        i class='eye icon'
-        | View
-      a.ui.label href=edit_meditation_path(meditation)
-        i class='pencil icon'
-        | Edit
+tr
+  td.collapsing
+    img.ui.small.rounded.bordered.image src=meditation.thumbnail.url
+  td.selectable
+    a href=meditation_path(meditation)
+      = meditation.title
+  td.selectable.collapsing
+    a href=edit_meditation_path(meditation)
+      i class='pencil icon'
+      | Edit Details
+  td.selectable.collapsing
+    a href=recut_meditation_path(meditation)
+      i class='cut icon'
+      | Edit Video

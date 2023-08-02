@@ -1,6 +1,6 @@
 
 - content_for :head do
-  link rel='preload' as='audio' href=image_url("prototype/audio/#{@meditation.audio.filename}")
+  link rel='preload' as='audio' href=@meditation.audio.url
 
   - @meditation.frames.first(@preload_count).each do |frame|
     link rel='preload' as=(frame.video? ? 'video' : 'image') href=frame.url
@@ -54,8 +54,7 @@
       .sym-footer__volume
         = inline_svg_tag('graphics/audio.svg')
 
-  /audio id='sym-audio' preload='auto' src=url_for(@meditation.audio) controls=true
-  audio id='sym-audio' preload='auto' src=image_url("prototype/audio/#{@meditation.audio.filename.base}.mp3") controls=true
+  audio id='sym-audio' preload='auto' src=@meditation.audio.url controls=true
 
 javascript:
   window.sym = {

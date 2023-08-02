@@ -1,0 +1,12 @@
+
+.ui.text.container
+  = simple_form_for @meditation do |f|
+    /= f.input :published
+    = f.input :title
+    = f.input :thumbnail
+
+    button.ui.submit.teal.button
+      | Save
+
+    a.ui.button href=meditations_path
+      | Back

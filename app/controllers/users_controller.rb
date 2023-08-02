@@ -1,10 +1,10 @@
 class UsersController < ApplicationController
 
   def track
-    params.require(%i[user_id meditation_id category])
+    params.require(%i[id meditation_id category])
 
     meditation = Meditation.find(params[:meditation_id])
-    user = User.find_or_create_by!(external_id: params[:user_id])
+    user = User.find_or_create_by!(external_id: params[:id])
     action = user.actions.create!({
       category: params[:category],
       record_type: meditation.class.name,

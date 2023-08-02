@@ -1,0 +1,30 @@
+
+.editor-preview
+  background-image: asset-url("preview.png")
+  background-size: contain
+  aspect-ratio: 1302 / 2616
+  padding: 27% 9%
+  display: flex
+  justify-content: space-evenly
+  align-items: center
+  flex-direction: column
+
+  > .image
+    aspect-ratio: 1
+    object-fit: cover
+
+  > audio
+    width: 100%
+
+.editor-form
+  .frame
+    .image
+      aspect-ratio: 1
+      object-fit: cover
+
+  a.frame[href]:hover
+    background: #EEE
+    border-radius: 10px
+
+  .center.aligned.field > label
+    text-align: center

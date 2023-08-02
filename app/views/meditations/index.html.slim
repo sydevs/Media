@@ -1,3 +1,12 @@
 
-.ui.tiny.divided.items
-  = render @meditations
+h1.ui.dividing.header Meditations
+
+a.ui.teal.basic.button href=new_meditation_path
+  | New Meditation
+
+- flash.each do |key, value|
+  .ui.closable.message class=key
+    = value
+
+table.ui.very.basic.very.padded.table
+  tbody = render @meditations

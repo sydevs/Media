@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '3.1.3'
+ruby '3.1.4'
 
 # Core gems
 gem 'rails', '~> 7.0.4' # Rails itself
@@ -10,6 +10,7 @@ gem 'pg', '~> 1.1' # Use postgresql as the database for Active Record
 gem 'puma', '~> 5.0' # Use the Puma web server [https://github.com/puma/puma]
 gem 'sassc-rails' # Use SASS for stylesheets
 gem 'slim-rails' # Use Slim for views
+gem 'jquery-rails' # Use jQuery for frontend
 
 # Default rails gems
 gem 'importmap-rails' # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -28,6 +29,7 @@ gem 'httparty'
 gem 'dotenv'
 gem 'active_decorator'
 gem 'google-cloud-storage'
+gem 'acts-as-taggable-on'
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
