@@ -6,6 +6,8 @@ class Meditation < ApplicationRecord
   has_many :keyframes, as: :media
   has_many :frames, -> { distinct }, through: :keyframes
 
+  accepts_nested_attributes_for :keyframes, allow_destroy: true
+
   default_scope -> { order(updated_at: :desc) }
 
   def keyframes_json

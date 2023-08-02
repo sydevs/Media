@@ -21,7 +21,7 @@ const Frames = {
           }),
         ]),
       ]),
-      m("p.hint", "Selecting an image will immediately add it to the meditation. If you make a mistake you can modify it in the \"Review\" section."),
+      m("p.hint", "Selecting an image will immediately add it to the meditation. If you make a mistake you can change or remove it in the \"Review\" section."),
       m(".ui.doubling.centered.padded.four.column.grid",
         frames.map((frame) => {
           frame.onselect = () => {
@@ -32,6 +32,10 @@ const Frames = {
             delete keyframe.onselect
             editorMeditation.keyframes.push(keyframe)
             editorMeditation.keyframes = editorMeditation.keyframes.sort((a, b) => a.seconds - b.seconds)
+            $.toast({
+              class: "teal",
+              message: `Added <b>${keyframe.title}</b> at ${new Date(keyframe.seconds * 1000).toISOString().slice(14, 19)}`
+            })
           }
           return m(Frame, frame)
         })

@@ -24,13 +24,15 @@ function updateFrame(time) {
     frameIndex += 1
     m.redraw()
   } else {
+    frameIndex = 0
     for (let i = 0; i < editorMeditation.keyframes.length; i++) {
       if (isCurrentFrame(i, time)) {
         frameIndex = i
-        m.redraw()
-        return
+        break
       }
     }
+
+    m.redraw()
   }
 }
 

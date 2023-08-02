@@ -61,11 +61,7 @@ class MeditationsController < ApplicationController
     end
 
     def arguments
-      if action_name == 'recut'
-        params.require(:meditation).permit(:keyframes)
-      else
-        params.require(:meditation).permit(:title, :thumbnail)
-      end
+      params.require(:meditation).permit(:title, :thumbnail, audio: {}, keyframes: [])
     end
 
 end

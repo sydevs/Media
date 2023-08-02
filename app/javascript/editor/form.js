@@ -1,4 +1,4 @@
-import Frame from "./frame"
+import Keyframe from "./keyframe"
 import Frames from "./frames"
 import "jquery"
 
@@ -27,8 +27,9 @@ const Form = {
         m(".content", [
           m(".ui.doubling.centered.padded.four.column.grid",
             editorMeditation.keyframes.map((keyframe, index) => {
+              keyframe.index = index
               keyframe.onremove = () => editorMeditation.keyframes.splice(index, 1)
-              return m(Frame, keyframe)
+              return m(Keyframe, keyframe)
             })
           )
         ]),
