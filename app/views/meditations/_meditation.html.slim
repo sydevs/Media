@@ -7,6 +7,14 @@ tr
       strong = meditation.title
       br
       em = meditation.tag_list
+  td.selectable.collapsing.right.aligned
+    - if meditation.published?
+      .ui.teal.basic.label
+        i.check.icon
+        | Complete
+    - else
+      .ui.basic.label
+        | Incomplete
   td.selectable.collapsing
     a href=edit_meditation_path(meditation)
       i class='pencil icon'

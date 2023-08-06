@@ -19,6 +19,9 @@ html
         a.item class=('active' if controller_name == 'meditations') href=meditations_path
           i.spa.icon
           | Meditations
+        /a.item class=('active' if controller_name == 'users') href=home_users_path
+          i.retweet.icon
+          | Users
         a.item class=('active' if controller_name == 'frames') href=frames_path
           i.film.icon
           | Frames

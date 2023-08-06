@@ -2,7 +2,7 @@
 .ui.text.container
   = simple_form_for @meditation do |f|
     .field = f.input :title
-    .field = f.input :tag_list
+    .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
 
     //pre = ActsAsTaggableOn::Tag.for_context(:tags).all.to_a
     //= f.input :tags, as: :select, collection: ActsAsTaggableOn::Tag.for_context(:tags), input_html: { class: "search three column", multiple: true }

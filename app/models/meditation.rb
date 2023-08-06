@@ -13,6 +13,7 @@ class Meditation < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   def duration
-    audio.metadata.fetch(:duration, nil)
+    result = audio.metadata.fetch(:duration, nil)
+    result ? (result / 60).round : nil
   end
 end

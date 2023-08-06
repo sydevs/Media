@@ -30,4 +30,26 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  sections:
+    path: "Embark on Your Path"
+    hero:
+      morning: "Your Morning Boost"
+      afternoon: "Your Afternoon Boost"
+      evening: "Your Evening Boost"
+      default: "Your Daily Meditation"
+    boost:
+      morning: "Your morningtime boost"
+      afternoon: "Your daytime boost"
+      evening: "Your eveningtime boost"
+      default: "Your daily boost"
+  cards:
+    hero:
+      title:
+        morning: "Morning meditation"
+        afternoon: "Afternoon meditation"
+        evening: "Evening meditation"
+        default: "Custom meditation"
+      subtitle: "Tailored to you"
+    path:
+      title: "Start your journey"
+      subtitle: "Meditation course to help you go deeper"

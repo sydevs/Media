@@ -1,5 +1,13 @@
 class UsersController < ApplicationController
 
+  def home
+    @time = params[:time] || "default"
+
+    if params[:format] != 'json'
+      @sections = render_to_string(template: 'users/home.json.jbuilder')
+    end
+  end
+
   def track
     params.require(%i[id meditation_id category])
 
