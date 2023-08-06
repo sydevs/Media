@@ -4,7 +4,9 @@ tr
     img.ui.small.rounded.bordered.image src=meditation.thumbnail.url
   td.selectable
     a href=meditation_path(meditation)
-      = meditation.title
+      strong = meditation.title
+      br
+      em = meditation.tag_list
   td.selectable.collapsing
     a href=edit_meditation_path(meditation)
       i class='pencil icon'
