@@ -1,6 +1,9 @@
 
 .ui.text.container
   = simple_form_for @meditation do |f|
+    - if f.object.errors.present?
+      pre = f.object.errors.messages
+
     .field = f.input :title
     .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
 
@@ -21,7 +24,7 @@
         = f.input :published, label: "Yes"
 
     - unless f.object.new_record?
-      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object, format: :json) }
+      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid, format: :json) }
 
     button.ui.submit.teal.button
       | Save

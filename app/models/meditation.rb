@@ -1,7 +1,9 @@
+require "securerandom"
+
 class Meditation < ApplicationRecord
   has_one_attached :thumbnail
   has_one_attached :audio
-  belongs_to :music
+  belongs_to :music, optional: true
   
   has_many :keyframes, as: :media
   has_many :frames, -> { distinct }, through: :keyframes
@@ -11,6 +13,8 @@ class Meditation < ApplicationRecord
 
   default_scope -> { order(updated_at: :desc) }
   scope :published, -> { where(published: true) }
+
+  before_create -> { self.uuid = SecureRandom.hex(5) }
 
   def duration
     result = audio.metadata.fetch(:duration, nil)

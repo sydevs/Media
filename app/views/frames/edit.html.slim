@@ -7,9 +7,17 @@ h1.ui.dividing.header
     .ten.wide.column
       //= f.input :published
       = f.input :title
-      = f.input :tags, as: :text, input_html: { value: f.object.tags.join(', ') }, disabled: true
+      = f.input :tags
+      = f.input :media, label: "Replace media"
+      
+      button.ui.submit.teal.button
+        | Save
+
+      a.ui.button href=frames_path
+        | Back
     .six.wide.column
       - if f.object.video?
         video.ui.centered.medium.rounded.image src=f.object.media.url autoplay=true muted=true loop=true
+        = image_tag f.object.thumbnail, class: "ui centered medium rounded image"
       - else
         img.ui.centered.medium.rounded.image src=f.object.media.url

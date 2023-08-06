@@ -7,7 +7,7 @@ class MeditationsController < ApplicationController
   end
 
   def show
-    @meditation = Meditation.eager_load(:keyframes, :frames).find(params[:id])
+    @meditation = Meditation.eager_load(:keyframes, :frames).find_by!(uuid: params[:id])
     @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
     @preload_count = 5
   end
@@ -17,12 +17,12 @@ class MeditationsController < ApplicationController
   end
   
   def create
-    @meditation = Meditation.find(params[:id])
+    @meditation = Meditation.create(arguments)
     
-    if @meditation.save(arguments)
+    if @meditation.save
       redirect_to recut_meditation_path(@meditation), flash: { success: "Created meditation successfully" }
     else
-      render :new
+      render :new, status: 422
     end
   end
 
@@ -61,7 +61,7 @@ class MeditationsController < ApplicationController
     if @meditation.update(arguments)
       redirect_to meditations_path, flash: { success: "Updated meditation successfully" }
     else
-      render :edit
+      render :edit, status: 422
     end
   end
 
