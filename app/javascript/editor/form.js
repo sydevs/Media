@@ -1,5 +1,5 @@
-import Keyframe from "./keyframe"
-import Frames from "./frames"
+import Keyframe from "editor/keyframe"
+import Frames from "editor/frames"
 import "jquery"
 
 const Form = {
