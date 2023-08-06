@@ -8,14 +8,10 @@ h1.ui.dividing.header
 
 .ui.hidden.section.divider
 
-javascript:
-  window.editorFrames = #{@frames_json.to_json.html_safe}
-  window.editorMeditation = #{@meditation_json.to_json.html_safe}
-
 = simple_form_for @meditation, html: { multipart: true } do |f|
-  #mithril
+  #mithril data-frames=@frames_json.to_json data-meditation=@meditation_json.to_json
 
-/.ui.grid
+//.ui.grid
   .five.wide.column
     img.ui.image src=image_url("preview.png")
   .eleven.wide.column

@@ -1,12 +1,11 @@
 
 let frameIndex = 0
-editorMeditation.playbackTime = 0
 
 function isCurrentFrame(index, time) {
-  let currentFrame = editorMeditation.keyframes[index]
+  let currentFrame = MEDITATION.keyframes[index]
   if (!currentFrame) return false
 
-  let nextFrame = editorMeditation.keyframes[index + 1]
+  let nextFrame = MEDITATION.keyframes[index + 1]
   if (!nextFrame) return true
 
   if (currentFrame.seconds <= time && time < nextFrame.seconds)
@@ -16,7 +15,7 @@ function isCurrentFrame(index, time) {
 }
 
 function updateFrame(time) {
-  editorMeditation.playbackTime = time
+  MEDITATION.playbackTime = time
 
   if (isCurrentFrame(frameIndex, time)) {
     // Do nothing
@@ -25,7 +24,7 @@ function updateFrame(time) {
     m.redraw()
   } else {
     frameIndex = 0
-    for (let i = 0; i < editorMeditation.keyframes.length; i++) {
+    for (let i = 0; i < MEDITATION.keyframes.length; i++) {
       if (isCurrentFrame(i, time)) {
         frameIndex = i
         break
@@ -38,7 +37,7 @@ function updateFrame(time) {
 
 const Preview = {
   view: function() {
-    let currentFrame = editorMeditation.keyframes[frameIndex]
+    let currentFrame = MEDITATION.keyframes[frameIndex]
 
     return [
       m(".editor-preview", [
@@ -48,7 +47,7 @@ const Preview = {
           autoplay: true,
         }),
         m("audio", {
-          src: editorMeditation.audio,
+          src: MEDITATION.audio,
           controls: true,
           controlslist: "nofullscreen nodownload noremoteplayback noplaybackrate",
           ontimeupdate: event => { updateFrame(event.currentTarget.currentTime) }

@@ -5,7 +5,7 @@ let query = ""
 const Frames = {
   view: function(vnode) {
     let frames = vnode.attrs.frames.filter(frame => {
-      return frame.title.includes(query)
+      return frame.title.includes(query) || frame.subtitle.includes(query)
     })
 
     frames.length = Math.min(frames.length, 4)
@@ -27,11 +27,11 @@ const Frames = {
           frame.onselect = () => {
             const keyframe = { ...frame }
             keyframe.frame_id = keyframe.id
-            keyframe.seconds = editorMeditation.playbackTime,
+            keyframe.seconds = MEDITATION.playbackTime,
             delete keyframe.id
             delete keyframe.onselect
-            editorMeditation.keyframes.push(keyframe)
-            editorMeditation.keyframes = editorMeditation.keyframes.sort((a, b) => a.seconds - b.seconds)
+            MEDITATION.keyframes.push(keyframe)
+            MEDITATION.keyframes = MEDITATION.keyframes.sort((a, b) => a.seconds - b.seconds)
             $.toast({
               class: "teal",
               message: `Added <b>${keyframe.title}</b> at ${new Date(keyframe.seconds * 1000).toISOString().slice(14, 19)}`

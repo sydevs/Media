@@ -4,6 +4,12 @@
     /= f.input :published
     = f.input :title
     = f.input :thumbnail
+    p
+      strong Current file: 
+      = f.object.thumbnail.filename
+    = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
+
+    .ui.hidden.divider
 
     button.ui.submit.teal.button
       | Save

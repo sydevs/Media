@@ -22,7 +22,7 @@ gem 'jbuilder' # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem 'bcrypt', '~> 3.1.7' # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby] # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'bootsnap', require: false # Reduces boot times through caching; required in config/boot.rb
-# gem 'image_processing', '~> 1.2' # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+gem 'image_processing', '~> 1.2' # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 
 # Data
 gem 'httparty'
@@ -30,6 +30,7 @@ gem 'dotenv'
 gem 'active_decorator'
 gem 'google-cloud-storage'
 gem 'acts-as-taggable-on'
+gem 'active_flag'
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility

@@ -7,7 +7,7 @@ const Form = {
     $(vnode.dom.children[0]).accordion()
   },
   view: function() {
-    const url = editorMeditation.audio
+    const url = MEDITATION.audio
     const filename = url.substring(url.lastIndexOf('/')+1)
 
     return m(".editor-form", [
@@ -21,19 +21,17 @@ const Form = {
           m(".file.field", [
             m("input", { type: "file", name: "meditation[audio]", id: "meditation_audio" }),
           ]),
-          //m("input", { type: "text", name: "meditation[audio]" }),
-          //m("input", { type: "text", name: "meditation[file]", value: "TESTING" }),
         ]),
         m(".title", [m("i.dropdown.icon"), "2. Choose Images or Videos"]),
         m(".content", [
-          m(Frames, { frames: editorFrames }),
+          m(Frames, { frames: FRAMES }),
         ]),
         m(".title", [m("i.dropdown.icon"), "3. Review"]),
         m(".content", [
           m(".ui.doubling.centered.padded.four.column.grid",
-            editorMeditation.keyframes.map((keyframe, index) => {
+            MEDITATION.keyframes.map((keyframe, index) => {
               keyframe.index = index
-              keyframe.onremove = () => editorMeditation.keyframes.splice(index, 1)
+              keyframe.onremove = () => MEDITATION.keyframes.splice(index, 1)
               return m(Keyframe, keyframe)
             })
           )

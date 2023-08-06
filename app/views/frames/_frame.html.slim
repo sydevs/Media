@@ -1,10 +1,7 @@
 
 a.ui.card href=edit_frame_path(frame)
   .image
-    - if frame.video?
-      video src=frame.url
-    - else
-      img src=frame.url
+    = image_tag frame.thumbnail
   .content
     i.right.floated.icon class=(frame.video? ? 'video' : 'image')
     .header = frame.title

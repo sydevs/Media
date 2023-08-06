@@ -12,7 +12,7 @@ const Keyframe = {
           return false
         },
       }, m("i.trash.icon")),
-      m(`${keyframe.video ? 'video' : 'img'}.ui.circular.bordered.image`, { src: keyframe.url }),
+      m("img.ui.circular.bordered.image", { src: keyframe.preview_url }),
       m(".center.aligned.field", [
         m("label", keyframe.title),
         m("p", keyframe.subtitle),
@@ -22,7 +22,7 @@ const Keyframe = {
             onblur: event => {
               const [hours, minutes, seconds] = event.currentTarget.value.split(":")
               keyframe.seconds = 60 * 60 * hours + 60 * minutes + seconds
-              editorMeditation.keyframes = editorMeditation.keyframes.sort((a, b) => a.seconds - b.seconds)
+              MEDITATION.keyframes = MEDITATION.keyframes.sort((a, b) => a.seconds - b.seconds)
             }
           }),
         ]),

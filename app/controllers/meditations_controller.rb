@@ -34,14 +34,22 @@ class MeditationsController < ApplicationController
     @meditation = Meditation.find(params[:id])
     @meditation_json = {
       audio: @meditation.audio.url,
-      keyframes: @meditation.keyframes_data,
+      keyframes: @meditation.keyframes.first(20).map do |kf|
+        kf.as_json(only: %i[id frame_id seconds]).merge!({
+          video: kf.frame.video?,
+          url: kf.frame.media.url,
+          preview_url: url_for(kf.frame.thumbnail),
+          title: kf.frame.title
+        })
+      end,
     }
 
     @frames_json = Frame.all.map do |f|
       f.as_json(only: %i[id title]).merge!({
         video: f.video?,
         url: f.media.url,
-        #subtitle: f.tags,
+        preview_url: url_for(f.thumbnail),
+        subtitle: f.tags,
       })
     end
   end

@@ -11,7 +11,7 @@ const Frame = {
         return false
       },
     }, [
-      m(`${frame.video ? 'video' : 'img'}.ui.circular.bordered.image`, { src: frame.url }),
+      m("img.ui.circular.bordered.image", { src: frame.preview_url }),
       m(".center.aligned.field", [
         m("label", frame.title),
         m("p", frame.subtitle),
