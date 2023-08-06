@@ -26,9 +26,9 @@ const Keyframe = {
             }
           }),
         ]),
-        m("input", { type: 'hidden', value: keyframe.id, name: `meditation[keyframes][${keyframe.index}][id]` }),
-        m("input", { type: 'hidden', value: keyframe.frame_id, name: `meditation[keyframes][${keyframe.index}][frame_id]` }),
-        m("input", { type: 'hidden', value: keyframe.seconds, name: `meditation[keyframes][${keyframe.index}][seconds]` }),
+        m("input", { type: 'hidden', value: keyframe.id, name: `meditation[keyframes_attributes][][id]` }),
+        m("input", { type: 'hidden', value: keyframe.frame_id, name: `meditation[keyframes_attributes][][frame_id]` }),
+        m("input", { type: 'hidden', value: keyframe.seconds, name: `meditation[keyframes_attributes][][seconds]` }),
       ]),
     ])
   }

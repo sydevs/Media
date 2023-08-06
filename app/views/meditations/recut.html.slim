@@ -9,14 +9,10 @@ h1.ui.dividing.header
 .ui.hidden.section.divider
 
 javascript:
-  const editorMeditation = {
-    audio: "#{@meditation.audio.url}",
-    keyframes: #{@meditation.keyframes_json.html_safe},
-  }
+  window.editorFrames = #{@frames_json.to_json.html_safe}
+  window.editorMeditation = #{@meditation_json.to_json.html_safe}
 
-  const editorFrames = #{@frames_json.html_safe}
-
-= simple_form_for @meditation do |f|
+= simple_form_for @meditation, html: { multipart: true } do |f|
   #mithril
 
 /.ui.grid
