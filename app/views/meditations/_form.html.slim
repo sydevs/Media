@@ -9,7 +9,7 @@
 
     .field
       = f.input :thumbnail
-      - if f.object.thumbnail?
+      - if f.object.thumbnail.present?
         p
           strong Current file: 
           = f.object.thumbnail.filename
