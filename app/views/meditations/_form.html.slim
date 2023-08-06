@@ -9,10 +9,11 @@
 
     .field
       = f.input :thumbnail
-      p
-        strong Current file: 
-        = f.object.thumbnail.filename
-      = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
+      - if f.object.thumbnail?
+        p
+          strong Current file: 
+          = f.object.thumbnail.filename
+        = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
 
     - unless f.object.new_record?
       .field
