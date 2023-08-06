@@ -5,6 +5,7 @@ import "jquery"
 const Form = {
   oncreate: function(vnode) {
     $(vnode.dom.children[0]).accordion()
+    $(".ui.checkbox").checkbox()
   },
   view: function() {
     const url = MEDITATION.audio
@@ -38,10 +39,13 @@ const Form = {
         ]),
       ]),
       m(".ui.divider"),
-      /*m("button.ui.orange.button", [
-        m("i.checkmark.icon"),
-        "Mark as Complete",
-      ]),*/
+      m(".field", [
+        m(".ui.large.checkbox", [
+          m("input", { type: "hidden", name: "meditation[published]", value: 0 }),
+          m("input", { type: "checkbox", name: "meditation[published]", checked: MEDITATION.published, value: 1 }),
+          m("label", "Mark as Complete"),
+        ]),
+      ]),
       m("button.ui.teal.button", "Save"),
       m("a.ui.button", { href: "/meditations" }, "Back"),
     ])

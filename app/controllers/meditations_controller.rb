@@ -33,12 +33,13 @@ class MeditationsController < ApplicationController
   def recut
     @meditation = Meditation.find(params[:id])
     @meditation_json = {
+      published: @meditation.published,
       audio: @meditation.audio.url,
       keyframes: @meditation.keyframes.first(20).map do |kf|
         kf.as_json(only: %i[id frame_id seconds]).merge!({
           video: kf.frame.video?,
           url: kf.frame.media.url,
-          preview_url: url_for(kf.frame.thumbnail),
+          thumbnail_url: url_for(kf.frame.thumbnail),
           title: kf.frame.title
         })
       end,
@@ -48,7 +49,7 @@ class MeditationsController < ApplicationController
       f.as_json(only: %i[id title]).merge!({
         video: f.video?,
         url: f.media.url,
-        preview_url: url_for(f.thumbnail),
+        thumbnail_url: url_for(f.thumbnail),
         subtitle: f.tags,
       })
     end
@@ -74,7 +75,7 @@ class MeditationsController < ApplicationController
     end
 
     def arguments
-      params.require(:meditation).permit(:title, :thumbnail, :audio, keyframes_attributes: %i[id frame_id seconds])
+      params.require(:meditation).permit(:published, :title, :thumbnail, :tag_list, :audio, keyframes_attributes: %i[id frame_id seconds])
     end
 
 end

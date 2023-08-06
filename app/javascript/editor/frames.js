@@ -1,12 +1,19 @@
 import Frame from "editor/frame"
 
-let query = ""
+let query = []
 
 const Frames = {
   view: function(vnode) {
-    let frames = vnode.attrs.frames.filter(frame => {
-      return frame.title.includes(query) || frame.subtitle.includes(query)
-    })
+    let frames = [...vnode.attrs.frames]
+
+    if (query.length) {
+      frames = frames.filter(frame => {
+        frame.matches = query.filter(q => frame.title.includes(q) || frame.subtitle.includes(q)).length
+        return frame.matches > 0
+      })
+  
+      frames.sort((a, b) => b.matches - a.matches)
+    }
 
     frames.length = Math.min(frames.length, 4)
 
@@ -17,7 +24,7 @@ const Frames = {
           m("input", {
             type: "text",
             placeholder: "Search...",
-            onkeyup: event => { query = event.currentTarget.value }
+            onkeyup: event => { query = event.currentTarget.value.split(" ").filter(q => q) }
           }),
         ]),
       ]),

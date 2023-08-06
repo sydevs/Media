@@ -4,7 +4,7 @@ const Keyframe = {
     let keyframe = vnode.attrs
     let time = new Date(keyframe.seconds * 1000).toISOString().slice(11, 19)
 
-    return m(".frame.column", [
+    return m(".frame.center.aligned.column", [
       m("a.ui.small.right.corner.label", {
         onclick: event => {
           keyframe.onremove()
@@ -12,8 +12,8 @@ const Keyframe = {
           return false
         },
       }, m("i.trash.icon")),
-      m("img.ui.circular.bordered.image", { src: keyframe.preview_url }),
-      m(".center.aligned.field", [
+      m("img.ui.circular.bordered.centered.image", { src: keyframe.thumbnail_url }),
+      m(".field", [
         m("label", keyframe.title),
         m("p", keyframe.subtitle),
         m(".ui.tiny.fluid.input", [

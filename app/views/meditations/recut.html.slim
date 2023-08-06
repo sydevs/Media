@@ -10,31 +10,3 @@ h1.ui.dividing.header
 
 = simple_form_for @meditation, html: { multipart: true } do |f|
   #mithril data-frames=@frames_json.to_json data-meditation=@meditation_json.to_json
-
-//.ui.grid
-  .five.wide.column
-    img.ui.image src=image_url("preview.png")
-  .eleven.wide.column
-    = simple_form_for @meditation do |f|
-      h2.ui.dividing.header Choose Audio and Frames
-      = f.input :audio
-      = f.input :music
-      = f.input :keyframes
-
-      h2.ui.dividing.header Review
-
-      .ui.doubling.centered.four.column.grid
-        - for keyframe in f.object.keyframes.first(10)
-          - frame = keyframe.frame
-          .column
-            //p = Time.at(keyframe.seconds).utc.strftime("%M:%S")
-            .field
-              .ui.tiny.fluid.action.input
-                input type="time" step=1 value=Time.at(keyframe.seconds).utc.strftime("%H:%M:%S")
-                button.ui.icon.button
-                  i.trash.icon
-
-            - if frame.video?
-              video.ui.small.rounded.centered.image src=frame.url
-            - else
-              img.ui.small.rounded.centered.image src=frame.url

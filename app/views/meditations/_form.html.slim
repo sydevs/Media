@@ -1,15 +1,26 @@
 
 .ui.text.container
   = simple_form_for @meditation do |f|
-    /= f.input :published
-    = f.input :title
-    = f.input :thumbnail
-    p
-      strong Current file: 
-      = f.object.thumbnail.filename
-    = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
+    .field = f.input :title
+    .field = f.input :tag_list
 
-    .ui.hidden.divider
+    //pre = ActsAsTaggableOn::Tag.for_context(:tags).all.to_a
+    //= f.input :tags, as: :select, collection: ActsAsTaggableOn::Tag.for_context(:tags), input_html: { class: "search three column", multiple: true }
+
+    .field
+      = f.input :thumbnail
+      p
+        strong Current file: 
+        = f.object.thumbnail.filename
+      = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
+
+    - unless f.object.new_record?
+      .field
+        label Make Visible to Public
+        = f.input :published, label: "Yes"
+
+    - unless f.object.new_record?
+      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object, format: :json) }
 
     button.ui.submit.teal.button
       | Save

@@ -3,7 +3,7 @@ const Frame = {
   view: function(vnode) {
     let frame = vnode.attrs
 
-    return m("a.frame.column", {
+    return m("a.frame.center.aligned.column", {
       href: "#",
       onclick: event => {
         frame.onselect()
@@ -11,10 +11,12 @@ const Frame = {
         return false
       },
     }, [
-      m("img.ui.circular.bordered.image", { src: frame.preview_url }),
-      m(".center.aligned.field", [
-        m("label", frame.title),
-        m("p", frame.subtitle),
+      m("img.ui.circular.bordered.centered.image", { src: frame.thumbnail_url }),
+      m(".field", [
+        m("label", [
+          m(`i.${frame.video ? 'video' : 'image'}.inline.icon`),
+          [frame.title, frame.subtitle].filter(t => t).join(" - "),
+        ]),
       ]),
     ])
   }
