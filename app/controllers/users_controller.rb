@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     @time = params[:time] || "default"
 
     if params[:format] != 'json'
-      @sections = render_to_string(template: 'users/home.json.jbuilder')
+      @sections = render_to_string('users/home', format: :json, layout: false)
     end
   end
 
