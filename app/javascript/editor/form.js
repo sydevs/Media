@@ -8,19 +8,24 @@ const Form = {
     $(".ui.checkbox").checkbox()
   },
   view: function() {
-    const url = MEDITATION.audio
-    const filename = url.substring(url.lastIndexOf('/')+1)
-
     return m(".editor-form", [
       m(".ui.styled.fluid.accordion", [
         m(".active.title", [m("i.dropdown.icon"), "1. Audio Track"]),
         m(".active.content", [
           m("p.hint", {}, [
             m("b", "Current file: "),
-            filename,
+            MEDITATION.audio.filename,
           ]),
           m(".file.field", [
-            m("input", { type: "file", name: "meditation[audio]", id: "meditation_audio" }),
+            m("input", {
+              type: "file",
+              name: "meditation[audio]",
+              onchange: event => {
+                let file = event.currentTarget.files[0]
+                MEDITATION.audio.url = URL.createObjectURL(file)
+                MEDITATION.audio.filename = file.name
+              }
+            }),
           ]),
         ]),
         m(".title", [m("i.dropdown.icon"), "2. Choose Images or Videos"]),
@@ -32,7 +37,10 @@ const Form = {
           m(".ui.doubling.centered.padded.four.column.grid",
             MEDITATION.keyframes.map((keyframe, index) => {
               keyframe.index = index
-              keyframe.onremove = () => MEDITATION.keyframes.splice(index, 1)
+              keyframe.onremove = () => {
+                //MEDITATION.keyframes.splice(index, 1)
+                MEDITATION.keyframes[index]._destroy = !MEDITATION.keyframes[index]._destroy
+              }
               return m(Keyframe, keyframe)
             })
           )
