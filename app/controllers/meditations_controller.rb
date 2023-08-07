@@ -1,6 +1,6 @@
 class MeditationsController < ApplicationController
   after_action :allow_iframe, only: %i[show tagged]
-  layout "embed", only: %i[show]
+  layout "embed", only: %i[show tagged]
 
   def index
     @meditations = Meditation.all
