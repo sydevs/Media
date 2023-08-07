@@ -35,12 +35,12 @@ en:
     hero:
       morning: "Your Morning Boost"
       afternoon: "Your Afternoon Boost"
-      evening: "Your Evening Boost"
+      evening: "Wind down for the day"
       default: "Your Daily Meditation"
     boost:
       morning: "Your morningtime boost"
       afternoon: "Your daytime boost"
-      evening: "Your eveningtime boost"
+      evening: "Your evening respite"
       default: "Your daily boost"
   cards:
     hero:

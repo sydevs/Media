@@ -1,5 +1,5 @@
 class MeditationsController < ApplicationController
-  after_action :allow_iframe, only: :show
+  after_action :allow_iframe, only: %i[show tagged]
   layout "embed", only: %i[show]
 
   def index
@@ -10,6 +10,14 @@ class MeditationsController < ApplicationController
     @meditation = Meditation.eager_load(:keyframes, :frames).find_by!(uuid: params[:id])
     @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
     @preload_count = 5
+  end
+
+  def tagged
+    @meditation = Meditation.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
+    @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
+    @preload_count = 5
+
+    render 'show'
   end
 
   def new

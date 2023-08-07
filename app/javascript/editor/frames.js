@@ -15,7 +15,7 @@ const Frames = {
       frames.sort((a, b) => b.matches - a.matches)
     }
 
-    frames.length = Math.min(frames.length, 4)
+    frames.length = Math.min(frames.length, 8)
 
     return [
       m(".field", [

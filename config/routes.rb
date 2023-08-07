@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   
   resources :meditations do
     get :recut, on: :member
+    get 'tagged/(:tag)', on: :collection, action: :tagged
   end
 
   resources :users do

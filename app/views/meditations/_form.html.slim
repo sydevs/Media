@@ -23,11 +23,13 @@
         label Make Visible to Public
         = f.input :published, label: "Yes"
 
-    - unless f.object.new_record?
-      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid, format: :json) }
-
     button.ui.submit.teal.button
       | Save
 
     a.ui.button href=meditations_path
       | Back
+
+    - unless f.object.new_record?
+      .ui.section.divider
+      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid) }
+      = f.input :data_url, input_html: { class: "teal", value: meditation_url(f.object.uuid, format: :json) }
