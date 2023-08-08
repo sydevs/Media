@@ -8,6 +8,8 @@ tr
       br
       em = meditation.tag_list
   td.collapsing.right.aligned
+    = meditation.duration ? meditation.duration.to_s + "m" : nil
+  td.collapsing.right.aligned
     - if meditation.published?
       .ui.teal.basic.label
         i.check.icon
@@ -15,11 +17,11 @@ tr
     - else
       .ui.basic.label
         | Incomplete
-  td.selectable.collapsing
-    a href=edit_meditation_path(meditation)
-      i class='pencil icon'
-      | Edit Details
-  td.selectable.collapsing
-    a href=recut_meditation_path(meditation)
-      i class='cut icon'
-      | Edit Video
+  td.collapsing
+    .ui.compact.tiny.basic.vertical.buttons
+      a.ui.button href=edit_meditation_path(meditation)
+        i class='pencil icon'
+        | Edit Details
+      a.ui.button href=recut_meditation_path(meditation)
+        i class='cut icon'
+        | Edit Video
