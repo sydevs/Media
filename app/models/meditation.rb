@@ -17,7 +17,7 @@ class Meditation < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.hex(5) }
 
   def thumbnail_url
-    image.present? ? image.url : ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
+    art.present? ? art.url : ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
   end
 
   def duration
