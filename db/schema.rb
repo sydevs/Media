@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_08_163822) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_08_201222) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,7 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_08_163822) do
     t.bigint "music_id"
     t.boolean "published"
     t.string "uuid"
-    t.integer "narrator", default: 1, null: false
+    t.integer "narrator", default: 0, null: false
     t.index ["music_id"], name: "index_meditations_on_music_id"
   end
 

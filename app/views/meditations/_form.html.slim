@@ -17,7 +17,7 @@
       .ui.two.column.grid
         .column
           = f.input :audio
-          = f.input :narrator, collection: Meditation.narrators.pairs, include_blank: false, include_hidden: false
+          = f.input :narrator, collection: Meditation.narrators.keys, include_blank: false, include_hidden: false
         .column
           - if f.object.audio.present?
             p

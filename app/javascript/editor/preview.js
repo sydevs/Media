@@ -59,12 +59,14 @@ const Preview = {
           controlslist: "nofullscreen nodownload noremoteplayback noplaybackrate",
           ontimeupdate: event => { updateFrame(event.currentTarget.currentTime) }
         }),
-        m(".ui.icon.tiny.circular.button", {
-          onclick: () => { audio ? audio.currentTime -= 5 : null }
-        }, m("i.undo.alternate.icon")),
-        m(".ui.icon.tiny.circular.button", {
-          onclick: () => { audio ? audio.currentTime += 5 : null }
-        }, m("i.redo.alternate.icon")),
+        m(".ui.tiny.basic.icon.buttons", [
+          m(".ui.button", {
+            onclick: () => { audio ? audio.currentTime -= 5 : null }
+          }, m("i.undo.alternate.icon")),
+          m(".ui.button", {
+            onclick: () => { audio ? audio.currentTime += 5 : null }
+          }, m("i.redo.alternate.icon")),
+        ])
       ])
     ]
   }

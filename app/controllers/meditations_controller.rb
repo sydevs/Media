@@ -50,7 +50,7 @@ class MeditationsController < ApplicationController
         kf.as_json(only: %i[id frame_id seconds]).merge!({
           video: kf.frame.video?,
           url: kf.frame.media(@meditation.narrator).url,
-          thumbnail_url: url_for(kf.frame.thumbnail),
+          thumbnail_url: url_for(kf.frame.thumbnail(@meditation.narrator)),
           title: kf.frame.title,
           subtitle: kf.frame.tags,
         })
@@ -61,7 +61,7 @@ class MeditationsController < ApplicationController
       f.as_json(only: %i[id title]).merge!({
         video: f.video?,
         url: f.media(@meditation.narrator).url,
-        thumbnail_url: url_for(f.thumbnail),
+        thumbnail_url: url_for(f.thumbnail(@meditation.narrator)),
         subtitle: f.tags,
       })
     end
