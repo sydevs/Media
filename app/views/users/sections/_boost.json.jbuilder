@@ -8,7 +8,7 @@ json.cards do
   json.array! meditations do |meditation|
     json.type :meditation
     json.title meditation.title
-    json.image_url meditation.thumbnail.url
+    json.image_url meditation.thumbnail_url
     json.url meditation_url(meditation, format: :json)
     json.duration meditation.duration
   end

@@ -1,7 +1,7 @@
 require "securerandom"
 
 class Meditation < ApplicationRecord
-  has_one_attached :thumbnail
+  has_one_attached :art
   has_one_attached :audio
   belongs_to :music, optional: true
   
@@ -15,6 +15,10 @@ class Meditation < ApplicationRecord
   scope :published, -> { where(published: true) }
 
   before_create -> { self.uuid = SecureRandom.hex(5) }
+
+  def thumbnail_url
+    image.present? ? image.url : ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
+  end
 
   def duration
     result = audio.metadata.fetch(:duration, nil)
