@@ -2,6 +2,8 @@ class Frame < ApplicationRecord
   has_one_attached :male
   has_one_attached :female
 
+  default_scope -> { order(updated_at: :desc) }
+
   def video?
     media&.filename&.extension == 'webm'
   end
