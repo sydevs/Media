@@ -5,7 +5,7 @@ class Frame < ApplicationRecord
   default_scope -> { order(updated_at: :desc) }
 
   def video?
-    media&.filename&.extension == 'webm'
+    %w[webm mp4].include?(media&.filename&.extension)
   end
 
   def media gender = :male
