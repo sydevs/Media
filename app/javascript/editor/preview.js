@@ -60,8 +60,11 @@ const Preview = {
           ontimeupdate: event => { updateFrame(event.currentTarget.currentTime) }
         }),
         m(".ui.icon.tiny.circular.button", {
-          onclick: event => { audio ? audio.currentTime -= 10 : null }
+          onclick: () => { audio ? audio.currentTime -= 5 : null }
         }, m("i.undo.alternate.icon")),
+        m(".ui.icon.tiny.circular.button", {
+          onclick: () => { audio ? audio.currentTime += 5 : null }
+        }, m("i.redo.alternate.icon")),
       ])
     ]
   }
