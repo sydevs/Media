@@ -35,6 +35,6 @@ class FramesController < ApplicationController
   private
 
     def arguments
-      params.require(:frame).permit(:published, :title, :tag_list, :male, :female)
+      params.require(:frame).permit(:published, :title, :tags, :male, :female)
     end
 end
