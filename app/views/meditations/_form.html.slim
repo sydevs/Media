@@ -7,29 +7,31 @@
     .field = f.input :title
     .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
 
-    //pre = ActsAsTaggableOn::Tag.for_context(:tags).all.to_a
-    //= f.input :tags, as: :select, collection: ActsAsTaggableOn::Tag.for_context(:tags), input_html: { class: "search three column", multiple: true }
-
-    .field
-      = f.input :art
-      - if f.object.art.present?
-        p
-          strong Current file: 
-          = f.object.art.filename
-        = image_tag f.object.art, class: "ui bordered rounded large image"
-
     - unless f.object.new_record?
       .field
         label Make Visible to Public
         = f.input :published, label: "Yes"
 
-    button.ui.submit.teal.button
-      | Save
+    .field
+      .ui.two.column.grid
+        .column
+          = f.input :art
+          - if f.object.art.present?
+            p
+              strong Current file: 
+              = f.object.art.filename
 
-    a.ui.button href=meditations_path
-      | Back
+        .column
+          = image_tag f.object.art, class: "ui bordered rounded large image"
+
+    p
+      button.ui.submit.teal.button
+        | Save
+      a.ui.button href=meditations_path
+        | Back
+
+    .ui.section.divider
 
     - unless f.object.new_record?
-      .ui.section.divider
       = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid) }
       = f.input :data_url, input_html: { class: "teal", value: meditation_url(f.object.uuid, format: :json) }

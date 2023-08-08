@@ -1,0 +1,22 @@
+
+= simple_form_for @frame do |f|
+  .ui.grid
+    .ten.wide.column
+      = f.input :title
+      = f.input :tags
+      = f.input :male, label: "Replace male media"
+      = f.input :female, label: "Replace female media"
+      
+      button.ui.submit.teal.button
+        | Save
+      a.ui.button href=frames_path
+        | Back
+    .six.wide.column
+      - if f.object.video?
+        video.ui.centered.medium.rounded.square.image src=f.object.male.url controls=true muted=true loop=true
+        br
+        video.ui.centered.medium.rounded.square.image src=f.object.female.url controls=true muted=true loop=true
+      - else
+        img.ui.centered.medium.rounded.square.image src=f.object.male.url
+        br
+        img.ui.centered.medium.rounded.square.image src=f.object.female.url

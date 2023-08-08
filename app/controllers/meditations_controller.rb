@@ -51,7 +51,8 @@ class MeditationsController < ApplicationController
           video: kf.frame.video?,
           url: kf.frame.media.url,
           thumbnail_url: url_for(kf.frame.thumbnail),
-          title: kf.frame.title
+          title: kf.frame.title,
+          subtitle: kf.frame.tags,
         })
       end,
     }

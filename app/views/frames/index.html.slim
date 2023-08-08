@@ -1,3 +1,14 @@
 
+h1.ui.dividing.header Frames
+
+a.ui.teal.basic.button href=new_frame_path
+  | New Frame
+
+- flash.each do |key, value|
+  .ui.closable.message class=key
+    = value
+
+.ui.hidden.divider
+
 .ui.doubling.six.tiny.cards
   = render @frames
