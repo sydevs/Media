@@ -11,12 +11,12 @@
     //= f.input :tags, as: :select, collection: ActsAsTaggableOn::Tag.for_context(:tags), input_html: { class: "search three column", multiple: true }
 
     .field
-      = f.input :thumbnail
-      - if f.object.thumbnail.present?
+      = f.input :art
+      - if f.object.art.present?
         p
           strong Current file: 
-          = f.object.thumbnail.filename
-        = image_tag f.object.thumbnail, class: "ui bordered rounded large image"
+          = f.object.art.filename
+        = image_tag f.object.art, class: "ui bordered rounded large image"
 
     - unless f.object.new_record?
       .field
