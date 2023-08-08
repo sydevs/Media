@@ -49,7 +49,7 @@ class MeditationsController < ApplicationController
       keyframes: @meditation.keyframes.first(20).map do |kf|
         kf.as_json(only: %i[id frame_id seconds]).merge!({
           video: kf.frame.video?,
-          url: kf.frame.media.url,
+          url: kf.frame.media(@meditation.narrator).url,
           thumbnail_url: url_for(kf.frame.thumbnail),
           title: kf.frame.title,
           subtitle: kf.frame.tags,
@@ -60,7 +60,7 @@ class MeditationsController < ApplicationController
     @frames_json = Frame.all.map do |f|
       f.as_json(only: %i[id title]).merge!({
         video: f.video?,
-        url: f.media.url,
+        url: f.media(@meditation.narrator).url,
         thumbnail_url: url_for(f.thumbnail),
         subtitle: f.tags,
       })
@@ -87,7 +87,7 @@ class MeditationsController < ApplicationController
     end
 
     def arguments
-      params.require(:meditation).permit(:published, :title, :art, :tag_list, :audio, keyframes_attributes: %i[id frame_id seconds _destroy])
+      params.require(:meditation).permit(:published, :title, :art, :tag_list, :audio, :narrator, keyframes_attributes: %i[id frame_id seconds _destroy])
     end
 
 end

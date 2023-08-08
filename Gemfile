@@ -30,6 +30,7 @@ gem 'dotenv'
 gem 'active_decorator'
 gem 'google-cloud-storage'
 gem 'acts-as-taggable-on'
+gem 'active_flag'
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility

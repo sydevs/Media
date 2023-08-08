@@ -10,6 +10,7 @@ class Meditation < ApplicationRecord
 
   accepts_nested_attributes_for :keyframes, allow_destroy: true
   acts_as_taggable_on :tags
+  flag :narrator, %i[male female]
 
   default_scope -> { order(updated_at: :desc) }
   scope :published, -> { where(published: true) }

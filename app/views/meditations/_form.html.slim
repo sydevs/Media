@@ -12,25 +12,40 @@
         label Make Visible to Public
         = f.input :published, label: "Yes"
 
+    .ui.divider
+    .field
+      .ui.two.column.grid
+        .column
+          = f.input :audio
+          = f.input :narrator, collection: Meditation.narrators.pairs, include_blank: false, include_hidden: false
+        .column
+          - if f.object.audio.present?
+            p
+              strong Current file: 
+              = f.object.audio.filename
+
+          audio src=f.object.audio.url controls=true
+
+    .ui.divider
     .field
       .ui.two.column.grid
         .column
           = f.input :art
+        .column
           - if f.object.art.present?
             p
               strong Current file: 
               = f.object.art.filename
 
-        .column
           = image_tag f.object.art, class: "ui bordered rounded large image"
+
+    .ui.section.divider
 
     p
       button.ui.submit.teal.button
         | Save
       a.ui.button href=meditations_path
         | Back
-
-    .ui.section.divider
 
     - unless f.object.new_record?
       = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid) }

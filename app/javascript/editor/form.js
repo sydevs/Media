@@ -10,7 +10,7 @@ const Form = {
   view: function() {
     return m(".editor-form", [
       m(".ui.styled.fluid.accordion", [
-        m(".active.title", [m("i.dropdown.icon"), "1. Audio Track"]),
+        /*m(".active.title", [m("i.dropdown.icon"), "1. Audio Track"]),
         m(".active.content", [
           m("p.hint", {}, [
             m("b", "Current file: "),
@@ -27,12 +27,12 @@ const Form = {
               }
             }),
           ]),
-        ]),
-        m(".title", [m("i.dropdown.icon"), "2. Choose Images or Videos"]),
-        m(".content", [
+        ]),*/
+        m(".active.title", [m("i.dropdown.icon"), "1. Choose Images or Videos"]),
+        m(".active.content", [
           m(Frames, { frames: FRAMES }),
         ]),
-        m(".title", [m("i.dropdown.icon"), "3. Review"]),
+        m(".title", [m("i.dropdown.icon"), "2. Review"]),
         m(".content", [
           m(".ui.doubling.centered.padded.four.column.grid",
             MEDITATION.keyframes.map((keyframe, index) => {
