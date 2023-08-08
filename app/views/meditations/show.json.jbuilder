@@ -9,5 +9,5 @@ json.frames @meditation.keyframes.order(seconds: :asc) do |keyframe|
   json.id keyframe.frame_id
   json.seconds keyframe.seconds
   json.type frame.video? ? 'video' : 'image'
-  json.frame frame.url
+  json.frame frame.media(@meditation.narrator).url
 end

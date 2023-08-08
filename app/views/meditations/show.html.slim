@@ -3,7 +3,7 @@
   link rel='preload' as='audio' href=@meditation.audio.url
 
   - @meditation.frames.first(@preload_count).each do |frame|
-    link rel='preload' as=(frame.video? ? 'video' : 'image') href=frame.url
+    link rel='preload' as=(frame.video? ? 'video' : 'image') href=frame.media(@meditation.narrator).url
 
 #sym-container data-state='intro' data-preloading='true'
   .sym-intro
@@ -37,7 +37,7 @@
     .sym-media__frame
       .sym-media__frame-stack id='sym-images'
         - @meditation.frames.each_with_index do |frame, index|
-          = frame.to_html(preload: index < @preload_count, class: ('active' if index.zero?))
+          = frame.to_html(preload: index < @preload_count, class: ('active' if index.zero?), gender: @meditation.narrator)
     .sym-media__marker id='sym-marker'
     img.sym-media__leaf src=image_url('graphics/leaf.svg')
     .sym-media__time id='sym-time' 0:00
