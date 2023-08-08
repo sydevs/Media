@@ -9,7 +9,7 @@ class Frame < ApplicationRecord
   end
 
   def media gender = :male
-    if gender&.to_sym == :female
+    if gender&.to_s == 'female'
       female.present? ? female : male
     else
       male.present? ? male : female
