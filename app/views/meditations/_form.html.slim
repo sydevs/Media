@@ -18,13 +18,14 @@
         .column
           = f.input :audio
           = f.input :narrator, collection: Meditation.narrators.keys, include_blank: false, include_hidden: false
+          = f.input :music_tag, hint: "Random music tracks will be selected using this tag"
         .column
           - if f.object.audio.present?
-            p
+            p.wrap
               strong Current file: 
               = f.object.audio.filename
 
-          audio src=f.object.audio.url controls=true
+            audio src=f.object.audio.url controls=true
 
     .ui.divider
     .field
@@ -33,7 +34,7 @@
           = f.input :art
         .column
           - if f.object.art.present?
-            p
+            p.wrap
               strong Current file: 
               = f.object.art.filename
 
@@ -48,5 +49,18 @@
         | Back
 
     - unless f.object.new_record?
-      = f.input :embed_url, input_html: { class: "teal", value: meditation_url(f.object.uuid) }
-      = f.input :data_url, input_html: { class: "teal", value: meditation_url(f.object.uuid, format: :json) }
+      = f.input :embed_url
+        .ui.action.input
+          = f.input_field :embed_url, value: meditation_url(f.object.uuid)
+          a.ui.button href=meditation_url(f.object.uuid) target='_blank'
+            i.eye.icon
+            | View
+
+      = f.input :data_url
+        .ui.action.input
+          = f.input_field :embed_url, value: meditation_url(f.object.uuid, format: :json)
+          a.ui.button href=meditation_url(f.object.uuid, format: :json) target='_blank'
+            i.eye.icon
+            | View
+ 
+.ui.hidden.section.divider

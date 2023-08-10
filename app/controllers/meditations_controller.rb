@@ -87,7 +87,7 @@ class MeditationsController < ApplicationController
     end
 
     def arguments
-      params.require(:meditation).permit(:published, :title, :art, :tag_list, :audio, :narrator, keyframes_attributes: %i[id frame_id seconds _destroy])
+      params.require(:meditation).permit(:published, :title, :art, :tag_list, :audio, :narrator, :music_tag, keyframes_attributes: %i[id frame_id seconds _destroy])
     end
 
 end

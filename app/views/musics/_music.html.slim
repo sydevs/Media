@@ -1,0 +1,13 @@
+
+tr
+  td
+    strong = music.title
+    br
+    em = music.tag_list
+  td.collapsing.right.aligned
+    = music.duration ? music.duration.to_s + "m" : nil
+  td.collapsing
+    .ui.compact.tiny.basic.vertical.buttons
+      a.ui.button href=edit_music_path(music)
+        i class='pencil icon'
+        | Edit

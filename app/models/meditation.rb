@@ -3,7 +3,6 @@ require "securerandom"
 class Meditation < ApplicationRecord
   has_one_attached :art
   has_one_attached :audio
-  belongs_to :music, optional: true
   
   has_many :keyframes, as: :media
   has_many :frames, -> { distinct }, through: :keyframes
@@ -19,6 +18,12 @@ class Meditation < ApplicationRecord
 
   def thumbnail_url
     art.present? ? art.url : ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
+  end
+
+  def musics
+    return [] unless music_tag.present?
+    
+    Music.tagged_with(music_tag).reorder('RANDOM()').limit(3)
   end
 
   def duration

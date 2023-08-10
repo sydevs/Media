@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   root 'meditations#index'
   resources :frames
+  resources :musics
   
   resources :meditations do
     get :recut, on: :member

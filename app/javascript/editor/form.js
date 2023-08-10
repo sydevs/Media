@@ -12,7 +12,7 @@ const Form = {
       m(".ui.styled.fluid.accordion", [
         /*m(".active.title", [m("i.dropdown.icon"), "1. Audio Track"]),
         m(".active.content", [
-          m("p.hint", {}, [
+          m("p.wrap", {}, [
             m("b", "Current file: "),
             MEDITATION.audio.filename,
           ]),
