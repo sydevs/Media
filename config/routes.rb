@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
   root 'meditations#index'
   resources :frames
-  resources :musics
+
+  resources :musics do
+    get 'tag/(:tag)', on: :collection, action: :index, as: :tagged
+  end
   
   resources :meditations do
     get :recut, on: :member

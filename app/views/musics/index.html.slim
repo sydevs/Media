@@ -1,12 +1,23 @@
 
 h1.ui.dividing.header Music
 
-a.ui.teal.basic.button href=new_music_path
-  | New Music
+p
+  a.ui.teal.basic.button href=new_music_path
+    | New Music
+
+p
+  - if params[:tag]
+    a.ui.teal.label href=musics_path
+      = params[:tag]
+      i.close.icon
+
+  /- @tags.where.not(name: params[:tag]).each do |tag|
+    a.ui.basic.label href=tagged_musics_path(tag.name)
+      = tag
 
 - flash.each do |key, value|
   .ui.closable.message class=key
     = value
 
-table.ui.very.basic.very.padded.table
+table.ui.very.basic.padded.table
   tbody = render @musics

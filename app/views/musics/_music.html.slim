@@ -2,8 +2,10 @@
 tr
   td
     strong = music.title
-    br
-    em = music.tag_list
+    .tags
+      - music.tags.each do |tag|
+        a href=tagged_musics_path(tag.name)
+          = tag
   td.collapsing
     = music.credit
   td.collapsing.right.aligned
