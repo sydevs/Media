@@ -13,3 +13,7 @@
         i.fitted.spa.icon
         ' 
       = tag
+
+  - if local_assigns[:other] && params[:tag] != 'other'
+    a.ui.basic.label href=method(tag_path).call('other')
+      | other
