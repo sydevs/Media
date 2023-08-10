@@ -1,7 +1,9 @@
 
 a.ui.card href=edit_frame_path(frame)
   .image
-    = image_tag frame.thumbnail(params[:gender])
+    - thumbnail = frame.thumbnail(params[:gender])
+    - if thumbnail.present?
+      = image_tag thumbnail
   .content
     i.right.floated.icon class=(frame.video? ? 'video' : 'image')
     .header = frame.title
