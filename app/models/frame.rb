@@ -2,7 +2,7 @@ class Frame < ApplicationRecord
   has_one_attached :male
   has_one_attached :female
 
-  default_scope -> { order(updated_at: :desc) }
+  default_scope -> { order(title: :asc) }
   scope :search, ->(q) { where("title ILIKE ?", "%#{q}%") }
 
   def video?

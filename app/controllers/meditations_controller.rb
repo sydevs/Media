@@ -3,8 +3,9 @@ class MeditationsController < ApplicationController
   layout "embed", only: %i[show tagged]
 
   def index
-    @meditations = params[:tag] ? Meditation.tagged_with(params[:tag]) : Meditation.all
+    @meditations = params[:tag] ? Meditation.tagged_with(params[:tag]) : Meditation.default_scoped
     @meditations = @meditations.search(params[:q]) if params[:q].present?
+    @meditations = @meditations.limit(50)
     @tags = ActsAsTaggableOn::Tag.where(name: %i[path morning afternoon evening])
   end
 
@@ -23,13 +24,14 @@ class MeditationsController < ApplicationController
   end
 
   def new
-    @meditation = Meditation.new
+    @meditation = Meditation.new(music_tag: 'default')
   end
   
   def create
     @meditation = Meditation.create(arguments)
     
     if @meditation.save
+      @meditation.keyframes.create!(seconds: 0, frame_id: Frame.where(title: "ready").first.id)
       redirect_to recut_meditation_path(@meditation), flash: { success: "Created meditation successfully" }
     else
       render :new, status: 422

@@ -48,7 +48,7 @@ const Preview = {
 
     return [
       m(".editor-preview", [
-        currentFrame ? m(`${currentFrame.video ? 'video' : 'img'}.ui.circular.image`, {
+        currentFrame ? m(`${currentFrame.video ? 'video' : 'img'}.ui.circular.bordered.image`, {
           src: currentFrame["url"],
           muted: true,
           autoplay: true,
