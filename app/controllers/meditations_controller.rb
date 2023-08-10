@@ -5,7 +5,7 @@ class MeditationsController < ApplicationController
   def index
     @meditations = params[:tag] ? Meditation.tagged_with(params[:tag]) : Meditation.all
     @meditations = @meditations.search(params[:q]) if params[:q].present?
-    @tags = ActsAsTaggableOn::Tag.most_used(10)
+    @tags = ActsAsTaggableOn::Tag.where(name: %i[path morning afternoon evening])
   end
 
   def show

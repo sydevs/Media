@@ -9,7 +9,7 @@ h1.ui.dividing.header Meditations
     i.search.icon
     input type="text" name="q" placeholder="Search..." value=params[:q]
 
-= render 'tags', tags: @tags
+= render 'tags', tags: @tags, tag_path: :tagged_meditations_path
 
 - flash.each do |key, value|
   .ui.closable.message class=key

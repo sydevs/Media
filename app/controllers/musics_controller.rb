@@ -2,7 +2,7 @@ class MusicsController < ApplicationController
 
   def index
     @musics = params[:tag] ? Music.tagged_with(params[:tag]) : Music.all
-    # @tags = ActsAsTaggableOn::Tag.most_used(10)
+    @tags = ActsAsTaggableOn::Tag.where(name: %i[morning afternoon evening])
   end
 
   def new

@@ -8,7 +8,7 @@
 
 - if tags
   - tags.where.not(name: params[:tag]).each do |tag|
-    a.ui.basic.label href=tagged_meditations_path(tag.name)
+    a.ui.basic.label href=method(tag_path).call(tag.name)
       - if tag.name == 'path'
         i.fitted.spa.icon
         ' 
