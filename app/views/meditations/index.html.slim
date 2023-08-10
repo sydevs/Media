@@ -1,8 +1,22 @@
 
 h1.ui.dividing.header Meditations
 
-a.ui.teal.basic.button href=new_meditation_path
-  | New Meditation
+= form_tag request.original_url, method: :get, class: 'ui inline form' do
+  a.ui.teal.basic.button href=new_meditation_path
+    | New Meditation
+
+  .ui.icon.input
+    i.search.icon
+    input type="text" name="q" placeholder="Search..." value=params[:q]
+
+- if params[:tag]
+  a.ui.teal.label href=meditations_path
+    = params[:tag]
+    i.close.icon
+
+- @tags.where.not(name: params[:tag]).each do |tag|
+  a.ui.basic.label href=tagged_meditations_path(tag.name)
+    = tag
 
 - flash.each do |key, value|
   .ui.closable.message class=key

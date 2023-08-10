@@ -3,7 +3,9 @@ class MeditationsController < ApplicationController
   layout "embed", only: %i[show tagged]
 
   def index
-    @meditations = Meditation.all
+    @meditations = params[:tag] ? Meditation.tagged_with(params[:tag]) : Meditation.all
+    @meditations = @meditations.search(params[:q]) if params[:q].present?
+    @tags = ActsAsTaggableOn::Tag.most_used(10)
   end
 
   def show

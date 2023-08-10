@@ -2,11 +2,13 @@
 tr
   td.collapsing
     img.ui.small.rounded.bordered.image src=meditation.thumbnail_url
-  td.selectable
-    a href=meditation_path(meditation.uuid)
-      strong = meditation.title
-      br
-      em = meditation.tag_list
+  td
+    strong = meditation.title
+    .tags
+      - meditation.tags.each do |tag|
+        a href=tagged_meditations_path(tag.name)
+          = tag
+
   td.collapsing.right.aligned
     = meditation.duration ? meditation.duration.to_s + "m" : nil
   td.collapsing.right.aligned
@@ -19,6 +21,9 @@ tr
         | Incomplete
   td.collapsing
     .ui.compact.tiny.basic.vertical.buttons
+      a.ui.button href=meditation_path(meditation) target="_blank"
+        i class='eye icon'
+        | View
       a.ui.button href=edit_meditation_path(meditation)
         i class='pencil icon'
         | Edit Details

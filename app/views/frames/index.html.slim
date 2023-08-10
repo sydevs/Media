@@ -1,17 +1,23 @@
 
 h1.ui.dividing.header Frames
 
-a.ui.teal.basic.button href=new_frame_path
-  | New Frame
 
-- if params[:gender] == 'female'
-  a.ui.orange.basic.button href=frames_path(gender: :male)
-    i.male.icon
-    | View Male Thumbnails
-- else
-  a.ui.orange.basic.button href=frames_path(gender: :female)
-    i.female.icon
-    | View Female Thumbnails
+= form_tag request.original_url, method: :get, class: 'ui inline form' do
+  a.ui.teal.basic.button href=new_frame_path
+    | New Frame
+
+  - if params[:gender] == 'female'
+    a.ui.orange.basic.button href=frames_path(gender: :male)
+      i.male.icon
+      | View Male Thumbnails
+  - else
+    a.ui.orange.basic.button href=frames_path(gender: :female)
+      i.female.icon
+      | View Female Thumbnails
+
+  .ui.icon.input
+    i.search.icon
+    input type="text" name="q" placeholder="Search..." value=params[:q]
 
 - flash.each do |key, value|
   .ui.closable.message class=key

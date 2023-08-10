@@ -1,7 +1,8 @@
 class FramesController < ApplicationController
 
   def index
-    @frames = Frame.all
+    @frames = Frame.default_scoped
+    @frames = @frames.search(params[:q]) if params[:q].present?
   end
 
   def new

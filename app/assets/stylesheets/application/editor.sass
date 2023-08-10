@@ -29,3 +29,14 @@
 
   .center.aligned.field > label
     text-align: center
+
+.tags a
+  font-style: italic
+  color: inherit
+  opacity: 0.8
+
+  &:hover
+    color: #00b5ad
+
+  &:not(:last-child)::after
+    content: ", "

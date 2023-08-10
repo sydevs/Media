@@ -3,6 +3,7 @@ class Frame < ApplicationRecord
   has_one_attached :female
 
   default_scope -> { order(updated_at: :desc) }
+  scope :search, ->(q) { where("title ILIKE ?", "%#{q}%") }
 
   def video?
     %w[webm mp4].include?(media&.filename&.extension)

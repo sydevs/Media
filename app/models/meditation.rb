@@ -13,6 +13,7 @@ class Meditation < ApplicationRecord
 
   default_scope -> { order(updated_at: :desc) }
   scope :published, -> { where(published: true) }
+  scope :search, ->(q) { where("title ILIKE ?", "%#{q}%") }
 
   before_create -> { self.uuid = SecureRandom.hex(5) }
 
