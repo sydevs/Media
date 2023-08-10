@@ -22,5 +22,8 @@ h1.ui.dividing.header Meditations
   .ui.closable.message class=key
     = value
 
-table.ui.very.basic.very.padded.table
-  tbody = render @meditations
+- if @meditations.present?
+  table.ui.very.basic.very.padded.table
+    tbody = render @meditations
+- else
+  .ui.message No results found

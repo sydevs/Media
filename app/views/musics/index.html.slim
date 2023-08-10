@@ -19,5 +19,8 @@ p
   .ui.closable.message class=key
     = value
 
-table.ui.very.basic.padded.table
-  tbody = render @musics
+- if @musics.present?
+  table.ui.very.basic.padded.table
+    tbody = render @musics
+- else
+  .ui.message No results found

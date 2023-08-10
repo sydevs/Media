@@ -25,5 +25,8 @@ h1.ui.dividing.header Frames
 
 .ui.hidden.divider
 
-.ui.doubling.six.tiny.cards
-  = render @frames
+- if @frames.present?
+  .ui.doubling.six.tiny.cards
+    = render @frames
+- else
+  .ui.message No results found
