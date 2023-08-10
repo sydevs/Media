@@ -18,7 +18,13 @@ class Meditation < ApplicationRecord
   before_create -> { self.uuid = SecureRandom.hex(5) }
 
   def thumbnail_url
-    art.present? ? art.url : ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
+    if art.present?
+      art.url
+    elsif tag_list.include?('path')
+      ActionController::Base.helpers.image_url("thumbnails/path.jpg")
+    else
+      ActionController::Base.helpers.image_url("thumbnails/placeholder.jpg")
+    end
   end
 
   def musics

@@ -1,0 +1,15 @@
+
+- if params[:tag]
+  a.ui.teal.label href=meditations_path
+    - if params[:tag] == 'path'
+      i.spa.icon
+    = params[:tag]
+    i.close.icon
+
+- if tags
+  - tags.where.not(name: params[:tag]).each do |tag|
+    a.ui.basic.label href=tagged_meditations_path(tag.name)
+      - if tag.name == 'path'
+        i.fitted.spa.icon
+        ' 
+      = tag

@@ -33,12 +33,11 @@
         .column
           = f.input :art
         .column
-          - if f.object.art.present?
-            p.wrap
-              strong Current file: 
-              = f.object.art.filename
+          p.wrap
+            strong Current file: 
+            = f.object.art.present? ? f.object.art.filename : 'default'
 
-            = image_tag f.object.art, class: "ui bordered rounded large image"
+          = image_tag f.object.thumbnail_url, class: "ui bordered rounded large image"
 
     .ui.section.divider
 
