@@ -15,7 +15,7 @@ const Frames = {
       frames.sort((a, b) => b.matches - a.matches)
     }
 
-    frames.length = Math.min(frames.length, 8)
+    frames.length = Math.min(frames.length, 16)
 
     return [
       m(".field", [
@@ -29,7 +29,7 @@ const Frames = {
         ]),
       ]),
       m("p.hint", "Selecting an image will immediately add it to the meditation. If you make a mistake you can change or remove it in the \"Review\" section."),
-      m(".ui.doubling.centered.padded.four.column.grid",
+      m(".ui.doubling.centered.padded.four.column.frames.grid",
         frames.map((frame) => {
           frame.onselect = () => {
             const keyframe = { ...frame }
