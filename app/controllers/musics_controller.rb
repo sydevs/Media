@@ -35,6 +35,6 @@ class MusicsController < ApplicationController
   private
 
     def arguments
-      params.require(:music).permit(:title, :tag_list, :audio)
+      params.require(:music).permit(:title, :credit, :tag_list, :audio)
     end
 end

@@ -5,6 +5,7 @@ json.audio_url @meditation.audio&.url
 
 json.musics @meditation.musics do |music|
   json.title music.title
+  json.credit music.credit
   json.url music.audio.url
 end
 
