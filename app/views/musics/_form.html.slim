@@ -4,6 +4,7 @@
     .ten.wide.column
       = f.input :title
       = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
+      = f.input :audio
       
       button.ui.submit.teal.button
         | Save
