@@ -1,19 +1,16 @@
 
-- if params[:tag]
-  a.ui.teal.label href=meditations_path
-    - if params[:tag] == 'path'
-      i.spa.icon
+- if params[:tag].present? && !tags&.include?(params[:tag])
+  a.ui.teal.label href=root_path
     = params[:tag]
     i.close.icon
 
 - if tags
-  - tags.where.not(name: params[:tag]).each do |tag|
-    a.ui.basic.label href=method(tag_path).call(tag.name)
-      - if tag.name == 'path'
-        i.fitted.spa.icon
-        ' 
+  - tags.each do |tag|
+    - active = tag == params[:tag]
+    - url = root_path + (active ? "" : "/tag/#{tag}")
+    a.ui.label href=url class=(active ? "teal" : "basic")
+      - if tag_icon(tag)
+        i.icon class=tag_icon(tag)
       = tag
-
-  - if local_assigns[:other] && params[:tag] != 'other'
-    a.ui.basic.label href=method(tag_path).call('other')
-      | other
+      - if active
+        i.close.icon

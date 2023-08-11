@@ -1,8 +1,20 @@
 class FramesController < ApplicationController
 
   def index
-    @frames = Frame.default_scoped
+    core_names = %w[mooladhara swadhistan nabhi heart vishuddhi agnya sahasrara]
+
+    if params[:tag]
+      if params[:tag] == "other"
+        @frames = Frame.where.not(title: core_names)
+      else
+        @frames = Frame.where(title: params[:tag])
+      end
+    else
+      @frames = Frame.default_scoped
+    end
+
     @frames = @frames.search(params[:q]) if params[:q].present?
+    @tags = core_names + %w[other]
   end
 
   def new

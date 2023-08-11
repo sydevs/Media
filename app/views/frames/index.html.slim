@@ -19,6 +19,8 @@ h1.ui.dividing.header Frames
     i.search.icon
     input type="text" name="q" placeholder="Search..." value=params[:q]
 
+= render 'tags', tags: @tags, root_path: frames_path
+
 - flash.each do |key, value|
   .ui.closable.message class=key
     = value

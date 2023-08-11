@@ -3,11 +3,13 @@ class MeditationsController < ApplicationController
   layout "embed", only: %i[show tagged]
 
   def index
-    core_tags = %i[path morning afternoon evening]
-
+    core_tags = %w[morning afternoon evening path]
+    
     if params[:tag]
       if params[:tag] == 'other'
         @meditations = Meditation.tagged_with(core_tags, exclude: true)
+      elsif params[:tag] == 'incomplete'
+        @meditations = Meditation.where(published: false)
       else
         @meditations = Meditation.tagged_with(params[:tag])
       end
@@ -17,7 +19,7 @@ class MeditationsController < ApplicationController
 
     @meditations = @meditations.search(params[:q]) if params[:q].present?
     @meditations = @meditations.limit(50)
-    @tags = ActsAsTaggableOn::Tag.where(name: core_tags)
+    @tags = core_tags + %w[other incomplete]
   end
 
   def show

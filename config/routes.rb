@@ -1,8 +1,7 @@
 Rails.application.routes.draw do
   root 'meditations#index'
-  resources :frames
 
-  resources :musics do
+  resources :musics, :frames do
     get 'tag/(:tag)', on: :collection, action: :index, as: :tagged
   end
   
