@@ -9,7 +9,7 @@ class MeditationsController < ApplicationController
       if params[:tag] == 'other'
         @meditations = Meditation.tagged_with(core_tags, exclude: true)
       elsif params[:tag] == 'incomplete'
-        @meditations = Meditation.where(published: false)
+        @meditations = Meditation.where.not(published: true)
       else
         @meditations = Meditation.tagged_with(params[:tag])
       end
@@ -29,7 +29,7 @@ class MeditationsController < ApplicationController
   end
 
   def tagged
-    @meditation = Meditation.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
+    @meditation = Meditation.published.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
     @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
     @preload_count = 5
 
