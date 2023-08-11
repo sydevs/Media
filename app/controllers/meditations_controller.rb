@@ -9,7 +9,7 @@ class MeditationsController < ApplicationController
       if params[:tag] == 'other'
         @meditations = Meditation.tagged_with(core_tags, exclude: true)
       elsif params[:tag] == 'incomplete'
-        @meditations = Meditation.where.not(published: true)
+        @meditations = Meditation.where(published: false)
       else
         @meditations = Meditation.tagged_with(params[:tag])
       end

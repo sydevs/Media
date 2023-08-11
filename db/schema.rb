@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_10_122655) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_11_110304) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,7 +65,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_10_122655) do
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "published"
+    t.boolean "published", default: false, null: false
     t.string "uuid"
     t.integer "narrator", default: 0, null: false
     t.string "music_tag"
