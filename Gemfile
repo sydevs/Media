@@ -40,7 +40,7 @@ gem 'simple_form'
 
 # Development
 gem 'better_errors' # Better errors
-
+gem 'pry' # Better dev console
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
