@@ -45,7 +45,7 @@ const Frames = {
             MEDITATION.keyframes = MEDITATION.keyframes.sort((a, b) => a.seconds - b.seconds)
             $.toast({
               class: "teal",
-              message: `Added <b>${keyframe.title}</b> at ${new Date(keyframe.seconds * 1000).toISOString().slice(14, 19)}`
+              message: `Added <b>${keyframe.category}</b> at ${new Date(keyframe.seconds * 1000).toISOString().slice(14, 19)}`
             })
           }
           return m(Frame, frame)

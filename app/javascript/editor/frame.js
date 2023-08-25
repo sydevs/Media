@@ -15,7 +15,7 @@ const Frame = {
       m(".field", [
         m("label", [
           m(`i.${frame.video ? 'video' : 'image'}.inline.icon`),
-          [frame.title, frame.subtitle].filter(t => t).join(" - "),
+          [frame.category, frame.subtitle].filter(t => t).join(" - "),
         ]),
       ]),
     ])

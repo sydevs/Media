@@ -15,7 +15,7 @@ const Keyframe = {
       }, m("i.trash.icon")),
       m("img.ui.circular.bordered.centered.image", { src: keyframe.thumbnail_url }),
       m(".field", [
-        m("label", [keyframe.title, keyframe.subtitle].filter(t => t).join(" - ")),
+        m("label", [keyframe.category, keyframe.subtitle].filter(t => t).join(" - ")),
         keyframe._destroy ?
           m(".ui.red.label", "Will be removed") :
           m(".ui.tiny.fluid.input", [
