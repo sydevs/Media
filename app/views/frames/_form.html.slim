@@ -2,7 +2,8 @@
 = simple_form_for @frame do |f|
   .ui.grid
     .ten.wide.column
-      = f.input :category
+      - categories = %w[mooladhara swadhistan nabhi heart vishuddhi agnya sahasrara clearing kundalini meditate namaste ready void].map { |c| [c.humanize, c] }
+      = f.input :category, collection: categories, include_blank: false, include_nil: false
       = f.input :tags
       = f.input :male, label: "Replace male media"
       = f.input :female, label: "Replace female media"
