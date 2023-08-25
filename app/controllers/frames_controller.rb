@@ -1,13 +1,13 @@
 class FramesController < ApplicationController
 
   def index
-    core_names = %w[mooladhara swadhistan nabhi heart vishuddhi agnya sahasrara]
+    core_names = %w[mooladhara swadhistan nabhi heart vishuddhi agnya sahasrara clearing]
 
     if params[:tag]
       if params[:tag] == "other"
-        @frames = Frame.where.not(category: core_names)
+        @frames = Frame.where.not(category: core_names.except('clearing'))
       else
-        @frames = Frame.where(category: params[:tag])
+        @frames = Frame.where(category: [params[:tag], params[:tag]+"_old"])
       end
     else
       @frames = Frame.default_scoped
