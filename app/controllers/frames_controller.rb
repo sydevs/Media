@@ -5,7 +5,7 @@ class FramesController < ApplicationController
 
     if params[:tag]
       if params[:tag] == "other"
-        @frames = Frame.where.not(category: core_names.except('clearing'))
+        @frames = Frame.where.not(category: core_names.excluding('clearing'))
       else
         @frames = Frame.where(category: [params[:tag], params[:tag]+"_old"])
       end
