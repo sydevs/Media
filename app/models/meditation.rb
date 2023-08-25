@@ -15,7 +15,7 @@ class Meditation < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :search, ->(q) { where("title ILIKE ?", "%#{q}%") }
 
-  validates_presence_of :audio, :art, :title, :uuid
+  validates_presence_of :audio, :title, :uuid
 
   before_create -> { self.uuid = SecureRandom.hex(5) }
 
