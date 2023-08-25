@@ -6,6 +6,9 @@
       = f.input :tags
       = f.input :male, label: "Replace male media"
       = f.input :female, label: "Replace female media"
+      = f.input :keyframes, label: "Usage Count" do
+        div = pluralize f.object.keyframes.distinct.count(:media_id), "meditation"
+        div = pluralize f.object.keyframes.count, "keyframes"
       
       button.ui.submit.teal.button
         | Save
