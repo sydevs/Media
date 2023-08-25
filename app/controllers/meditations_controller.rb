@@ -44,7 +44,7 @@ class MeditationsController < ApplicationController
     @meditation = Meditation.create(arguments)
     
     if @meditation.save
-      @meditation.keyframes.create!(seconds: 0, frame_id: Frame.where(title: "ready").first.id)
+      @meditation.keyframes.create!(seconds: 0, frame_id: Frame.where(category: "ready").first.id)
       redirect_to recut_meditation_path(@meditation), flash: { success: "Created meditation successfully" }
     else
       render :new, status: 422
@@ -68,14 +68,14 @@ class MeditationsController < ApplicationController
           video: kf.frame.video?,
           url: kf.frame.media(@meditation.narrator).url,
           thumbnail_url: url_for(kf.frame.thumbnail(@meditation.narrator)),
-          title: kf.frame.title,
+          title: kf.frame.category,
           subtitle: kf.frame.tags,
         })
       end,
     }
 
     @frames_json = Frame.all.map do |f|
-      f.as_json(only: %i[id title]).merge!({
+      f.as_json(only: %i[id category]).merge!({
         video: f.video?,
         url: f.media(@meditation.narrator).url,
         thumbnail_url: url_for(f.thumbnail(@meditation.narrator)),

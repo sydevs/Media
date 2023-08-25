@@ -15,6 +15,8 @@ class Meditation < ApplicationRecord
   scope :published, -> { where(published: true) }
   scope :search, ->(q) { where("title ILIKE ?", "%#{q}%") }
 
+  validates_presence_of :audio, :art, :title, :uuid
+
   before_create -> { self.uuid = SecureRandom.hex(5) }
 
   def thumbnail_url

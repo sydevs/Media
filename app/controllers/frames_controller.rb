@@ -5,9 +5,9 @@ class FramesController < ApplicationController
 
     if params[:tag]
       if params[:tag] == "other"
-        @frames = Frame.where.not(title: core_names)
+        @frames = Frame.where.not(category: core_names)
       else
-        @frames = Frame.where(title: params[:tag])
+        @frames = Frame.where(category: params[:tag])
       end
     else
       @frames = Frame.default_scoped
@@ -48,6 +48,6 @@ class FramesController < ApplicationController
   private
 
     def arguments
-      params.require(:frame).permit(:published, :title, :tags, :male, :female)
+      params.require(:frame).permit(:published, :category, :tags, :male, :female)
     end
 end

@@ -4,6 +4,8 @@ class Frame < ApplicationRecord
 
   has_many :keyframes
 
+  #default_scope -> { order(category: :asc) }
+  scope :search, ->(q) { where("category ILIKE ?", "%#{q}%") }
 
   def video?
     %w[webm mp4].include?(media&.filename&.extension)
