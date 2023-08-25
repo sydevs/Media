@@ -4,7 +4,7 @@ class Frame < ApplicationRecord
 
   has_many :keyframes
 
-  default_scope -> { order(category: :asc) }
+  default_scope -> { order(category: :asc, tags: :asc) }
   scope :search, ->(q) { where("category ILIKE ?", "%#{q}%") }
 
   def video?
