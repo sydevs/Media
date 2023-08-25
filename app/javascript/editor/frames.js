@@ -11,7 +11,7 @@ const Frames = {
         frame.matches = query.filter(q => {
           if (q == 'video') return frame.video
           if (q == 'image') return !frame.video
-          return frame.title.includes(q) || frame.subtitle.includes(q)
+          return frame.category.includes(q) || frame.subtitle.includes(q)
         }).length
         return frame.matches > 0
       })
