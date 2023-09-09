@@ -29,7 +29,8 @@ class MeditationsController < ApplicationController
   end
 
   def tagged
-    @meditation = Meditation.published.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
+    #@meditation = Meditation.published.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
+    @meditation = Meditation.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
     @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
     @preload_count = 5
 
