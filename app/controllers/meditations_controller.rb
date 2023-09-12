@@ -30,7 +30,12 @@ class MeditationsController < ApplicationController
 
   def tagged
     #@meditation = Meditation.published.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
-    @meditation = Meditation.eager_load(:keyframes, :frames).tagged_with(params[:tag]).reorder('RANDOM()').first
+    tags = [params[:tag]] + (params[:with]&.split(',') || [])
+    meditations = Meditation.tagged_with(tags).eager_load(:keyframes, :frames)
+    meditations = meditations.tagged_with(params[:without].split(','), exclude: true) if params[:without].present?
+    @meditation = meditations.reorder('RANDOM()').first
+    throw ActiveRecord::RecordNotFound if @meditation.nil?
+
     @keyframes = @meditation.keyframes.as_json(only: %i[id frame_id seconds])
     @preload_count = 5
 

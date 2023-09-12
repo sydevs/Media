@@ -1,6 +1,7 @@
 
 json.id @meditation.id
 json.title @meditation.title
+json.tags @meditation.tags.map(&:name)
 json.audio_url @meditation.audio&.url
 
 json.musics @meditation.musics do |music|
