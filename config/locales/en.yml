@@ -1,55 +1,51 @@
-# Files in the config/locales directory are used for internationalization
-# and are automatically loaded by Rails. If you want to use locales other
-# than English, add the necessary files in this directory.
-#
-# To use the locales, use `I18n.t`:
-#
-#     I18n.t "hello"
-#
-# In views, this is aliased to just `t`:
-#
-#     <%= t("hello") %>
-#
-# To use a different locale, set it with `I18n.locale`:
-#
-#     I18n.locale = :es
-#
-# This would use the information in config/locales/es.yml.
-#
-# The following keys must be escaped otherwise they will not be retrieved by
-# the default I18n backend:
-#
-# true, false, on, off, yes, no
-#
-# Instead, surround them with single quotes.
-#
-# en:
-#   "true": "foo"
-#
-# To learn more, please read the Rails Internationalization guide
-# available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  sections:
-    path: "Embark on Your Path"
-    hero:
-      morning: "Your Morning Boost"
-      afternoon: "Your Afternoon Boost"
-      evening: "Wind down for the day"
-      default: "Your Daily Meditation"
-    boost:
-      morning: "Your morningtime boost"
-      afternoon: "Your daytime boost"
-      evening: "Your evening respite"
-      default: "Your daily boost"
-  cards:
-    hero:
-      title:
-        morning: "Morning meditation"
-        afternoon: "Afternoon meditation"
-        evening: "Evening meditation"
-        default: "Custom meditation"
-      subtitle: "Tailored to you"
-    path:
+  featured:
+    realisation:
+      header: "The First Step"
+      title: "Your First Meditation"
+      subtitle: "Activate your inner energy"
+    daily:
+      header: "Keep in balance"
+      title: "Daily meditation"
+      subtitle: "Tailored for you"
+    morning:
+      header: "Start Your Day Right"
+      title: "Morning meditation"
+      subtitle: :featured.daily.subtitle
+    afternoon:
+      header: "Your Afternoon Pickup"
+      title: "Afternoon meditation"
+      subtitle: :featured.daily.subtitle
+    evening:
+      header: "Wind down for the day"
+      title: "Evening meditation"
+      subtitle: :featured.daily.subtitle
+    live:
+      header: "Join a live meditation"
+      title: "Online guided meditation"
+      subtitle: "Starting soon!"
+    start_path:
+      header: "Embark on Your Path"
       title: "Start your journey"
-      subtitle: "Meditation course to help you go deeper"
+      subtitle: "Self-paced Meditation course"
+    continue_path:
+      header: :featured.start_path.header
+      title: "Continue your journey"
+      subtitle: "There's more to discover"
+    music:
+      header: "Music & Meditation"
+      title: "Meditation Music"
+      subtitle: "Lead your own meditations with musical accompaniment"
+    map:
+      header: "In-Person Meditation"
+      title: "Meditations Near You"
+      subtitle: "Find free meditation sessions guided by local instructors"
+  categories:
+    musical: "Music-focused Meditations"
+    short: "Quick Meditations"
+    morning: "Your morning energy"
+    afternoon: "Your daytime boost"
+    evening: "Your evening respite"
+    recommended_meditations: "Recommended For You"
+    saved_meditations: "Your saved meditations"

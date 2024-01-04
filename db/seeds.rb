@@ -24,12 +24,13 @@ music.audio.attach(io: File.open('app/assets/images/prototype/audio/music.mp3'),
   meditation.music = music
   meditation.duration = 482
   meditation.keyframes.destroy_all
+  meditation.tags = %w[morning afternoon evening short music].sample(3)
 
   puts "Creating meditation - #{meditation.title}"
   meditation.save!
 
   seconds = 0
-  180.times.each do |index|
+  40.times.each do |index|
     frame = frames.sample
     meditation.keyframes.create!(frame: frames.sample, seconds: seconds)
     seconds += (frame.video? ? 6 : 3) + rand(5)

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_25_102736) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_04_170548) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,6 +58,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_102736) do
     t.datetime "updated_at", null: false
     t.index ["frame_id"], name: "index_keyframes_on_frame_id"
     t.index ["media_type", "media_id"], name: "index_keyframes_on_media"
+  end
+
+  create_table "meditation_views", force: :cascade do |t|
+    t.bigint "meditation_id", null: false
+    t.bigint "user_id", null: false
+    t.integer "progress", null: false
+    t.integer "rating"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meditation_id"], name: "index_meditation_views_on_meditation_id"
+    t.index ["user_id"], name: "index_meditation_views_on_user_id"
   end
 
   create_table "meditations", force: :cascade do |t|
@@ -108,26 +119,31 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_25_102736) do
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
-  create_table "user_actions", force: :cascade do |t|
-    t.string "category", null: false
-    t.bigint "user_id"
-    t.string "record_type"
-    t.bigint "record_id"
-    t.json "metadata", default: {}
+  create_table "user_meditations", force: :cascade do |t|
+    t.bigint "meditation_id", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["record_type", "record_id"], name: "index_user_actions_on_record"
-    t.index ["user_id"], name: "index_user_actions_on_user_id"
+    t.index ["meditation_id"], name: "index_user_meditations_on_meditation_id"
+    t.index ["user_id"], name: "index_user_meditations_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "external_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "seen", default: 0, null: false
+    t.bigint "unlocked", default: 0, null: false
+    t.integer "path_progress", default: 0, null: false
+    t.datetime "path_progressed_at", default: "2024-01-04 17:23:08", null: false
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "keyframes", "frames"
+  add_foreign_key "meditation_views", "meditations"
+  add_foreign_key "meditation_views", "users"
   add_foreign_key "taggings", "tags"
+  add_foreign_key "user_meditations", "meditations"
+  add_foreign_key "user_meditations", "users"
 end

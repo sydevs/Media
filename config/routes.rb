@@ -12,8 +12,8 @@ Rails.application.routes.draw do
   end
 
   resources :users do
-    get :home, on: :collection
-    #get :home, on: :member
-    get :track, on: :member
+    #get :home, on: :collection
+    get :feed, on: :member
+    post :track, on: :member
   end
 end

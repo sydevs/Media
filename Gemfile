@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| 'https://github.com/#{repo}.git' }
 
-ruby '3.1.4'
+ruby '3.3.0'
 
 # Core gems
 gem 'rails', '~> 7.0.4' # Rails itself
@@ -31,6 +31,7 @@ gem 'active_decorator'
 gem 'google-cloud-storage'
 gem 'acts-as-taggable-on'
 gem 'active_flag'
+# gem 'disco' # Recommendations engine
 
 # Frontend
 gem 'autoprefixer-rails' # For automatic cross browser CSS compatibility
