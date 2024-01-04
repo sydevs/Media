@@ -57,7 +57,21 @@ If any section has `disabled=true` then it should appear greyed out, and not be 
 - METHOD: `POST`
 - **external_id** - the user identifier used in the We Meditate app or other client application. The server has it's own internal user ID, which you don't need to worry about.
 - **events** - an array of `event` objects:
-  - **type** - one of
+  - **type** - one of `save`, `unsave`, `meditation`, `seen`, `unlock`, `path`
+    - A `save` or `unsave` event will add/remove a meditation from the user's list of saved meditations. This list is displayed at the bottom of their homepage feed.
+    - A `meditation` event tracks when a user watches a meditation. If possible you should also provide the `progress` and `rating` to give us more information that recommendations could be based on in the future.
+    - A `seen` event lets us know what parts of the app the user has already seen, you should provide the `flag` field to tell us which part to mark as "seen"
+    - An `unlock` event tells the server to unlock a new category of meditations for the user. Most important for the moment is that after the user watches the "First Meditation" you must unlock the `realisation` flag to enable all other meditations.
+    - A `path` event tracks progress on the path. This helps us know whether to tell the user to "start" or "continue" on the path. It also can be used to suggest silent meditations or in-person meditations when they are further on the path.
+    - There is no way to "unsee" or "lock" things which have been "seen" or "unlocked"
+  - **meditation_id** - required if type= `save`, `unsave`, or `meditation`
+  - **flag** - which flag to set
+    - if type=`seen`, this should be one of `realisation`, `path`, `music`, `introspect`, `map`
+    - if type=`unlock`, this should be one of `realisation`, `footsoak`, `lectures`
+  - **progress**
+    - if type=`meditation`, an integer from 0 - 100, indicating what percentage of the meditation was watched
+    - if type=`path`, the number of path modules that the user has completed
+  - **rating** - if type=`meditation`
 
 #### JSON Response <!-- omit in toc -->
 - **status** - an http status code

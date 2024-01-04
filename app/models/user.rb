@@ -21,8 +21,12 @@ class User < ApplicationRecord
       saved_meditations << meditation
     when 'unsave'
       saved_meditations.delete(meditation)
-    when 'view'
-      mv = meditation_views.create
+    when 'meditation'
+      mv = meditation_views.create({
+        meditation_id: action['meditation_id'],
+        progress: action['progress'].to_i,
+        rating: action['rating'].to_i,
+      })
     when 'path'
       self.path_progress = action['progress']
       self.path_progressed_at = Time.now
