@@ -1,6 +1,6 @@
 require 'oauth2'
 
-class ApplicationController < ApplicationController
+class OauthController < ApplicationController
 
   def connect
     puts "OATH CONNECT"
