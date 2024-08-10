@@ -4,6 +4,6 @@ import "jquery"
 import "fomantic-ui"
 import "editor"
 
-if (typeof window !== 'undefined' && window.top === window.self && window.location.search == 'storyblok') { 
-  //window.location.assign('https://app.storyblok.com/oauth/app_redirect')
+if (typeof window !== 'undefined' && window.top === window.self && window.location.pathname == '/storyblok') { 
+  window.location.assign('https://app.storyblok.com/oauth/app_redirect')
 }

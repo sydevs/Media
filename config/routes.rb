@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'meditations#index'
-  get 'storyblok', controller: 'application'
+  get 'storyblok', to: 'meditations#index'
 
   resources :musics, :frames do
     get 'tag/(:tag)', on: :collection, action: :index, as: :tagged
