@@ -2,6 +2,8 @@ require 'oauth2'
 
 class OauthController < ApplicationController
 
+  skip_before_action :redirect_to_storyblok
+
   def connect
     puts "OATH CONNECT"
     pp params
@@ -17,7 +19,5 @@ class OauthController < ApplicationController
     access = client.auth_code.get_token(params[:code], redirect_uri: oauth_callback_url)
     response = access.get('/api/resource', params: {'query_foo' => 'bar'})
     pp response
-    
-    # redirect_to 'https://app.storyblok.com/oauth/app_redirect', allow_other_host: true
   end
 end
