@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   root 'meditations#index'
-  get 'storyblok', to: 'meditations#index'
+
+  scope :ouath, controller: 'oauth' do
+    get 'connect'
+    get 'callback'
+  end
 
   resources :musics, :frames do
     get 'tag/(:tag)', on: :collection, action: :index, as: :tagged

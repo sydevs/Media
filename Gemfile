@@ -26,6 +26,7 @@ gem 'image_processing', '~> 1.2' # Use Active Storage variants [https://guides.r
 
 # Integration
 gem 'storyblok' # Connect to storyblok for content management
+gem 'oauth2' # Connect to storyblok for content management
 
 # Data
 gem 'httparty'
