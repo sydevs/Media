@@ -235,7 +235,6 @@ GEM
       version_gem (~> 1.1)
     os (1.1.4)
     pg (1.5.3)
-    pkce_challenge (1.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -395,7 +394,6 @@ DEPENDENCIES
   jquery-rails
   oauth2
   pg (~> 1.1)
-  pkce_challenge
   pry
   puma (~> 5.0)
   rails (~> 7.0.4)
