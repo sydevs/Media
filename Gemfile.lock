@@ -81,6 +81,8 @@ GEM
       rack (>= 0.9.0)
       rouge (>= 1.0.0)
     bindex (0.8.1)
+    binding_of_caller (1.0.1)
+      debug_inspector (>= 1.2.0)
     bootsnap (1.16.0)
       msgpack (~> 1.2)
     builder (3.2.4)
@@ -100,11 +102,15 @@ GEM
     debug (1.8.0)
       irb (>= 1.5.0)
       reline (>= 0.3.1)
+    debug_inspector (1.2.0)
     declarative (0.0.20)
     digest-crc (0.6.5)
       rake (>= 12.0.0, < 14.0.0)
     domain_name (0.6.20240107)
     dotenv (2.8.1)
+    dotenv-rails (2.8.1)
+      dotenv (= 2.8.1)
+      railties (>= 3.2)
     erubi (1.12.0)
     execjs (2.8.1)
     faraday (2.7.10)
@@ -229,6 +235,7 @@ GEM
       version_gem (~> 1.1)
     os (1.1.4)
     pg (1.5.3)
+    pkce_challenge (1.0.0)
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -372,10 +379,12 @@ DEPENDENCIES
   acts-as-taggable-on
   autoprefixer-rails
   better_errors
+  binding_of_caller
   bootsnap
   capybara
   debug
   dotenv
+  dotenv-rails
   fomantic-ui-sass
   google-cloud-storage
   httparty
@@ -386,6 +395,7 @@ DEPENDENCIES
   jquery-rails
   oauth2
   pg (~> 1.1)
+  pkce_challenge
   pry
   puma (~> 5.0)
   rails (~> 7.0.4)

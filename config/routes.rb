@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root 'meditations#index'
 
-  scope :ouath, controller: 'oauth' do
+  scope :auth, controller: 'auth' do
     get 'connect'
     get 'callback'
   end
