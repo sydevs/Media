@@ -51,6 +51,7 @@ class Meditation < ApplicationRecord
         auth_scheme: :request_body,
       })
 
-      
+      # Within this class you can reference variables of the meditation model, just by calling their name.
+      # Take a look at schema.rb to find out what columns are on the Meditation table
     end
 end
