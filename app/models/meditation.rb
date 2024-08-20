@@ -18,6 +18,7 @@ class Meditation < ApplicationRecord
   validates_presence_of :audio, :title
 
   before_create -> { self.uuid = SecureRandom.hex(5) }
+  after_update :sync_to_storyblok
 
   def thumbnail_url
     if art.present?
@@ -39,4 +40,17 @@ class Meditation < ApplicationRecord
     result = audio.metadata.fetch(:duration, nil)
     result ? (result / 60).round : nil
   end
+
+  private
+
+    def sync_to_storyblok
+      client_id = ENV.fetch('STORYBLOK_CLIENT_ID')
+      client_secret = ENV.fetch('STORYBLOK_CLIENT_SECRET')
+      client = OAuth2::Client.new(client_id, client_secret, {
+        site: 'https://app.storyblok.com',
+        auth_scheme: :request_body,
+      })
+
+      
+    end
 end
