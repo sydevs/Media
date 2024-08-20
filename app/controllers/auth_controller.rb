@@ -7,7 +7,7 @@ class AuthController < ApplicationController
   def connect
     puts "OAUTH CONNECT"
     pp params
-    
+
     if params[:space_id] != ENV.fetch('STORYBLOK_SPACE_ID')
       head :forbidden
       return
@@ -38,6 +38,7 @@ class AuthController < ApplicationController
     end
 
     access_token = @client.auth_code.get_token(params[:code], redirect_uri: callback_url)
+    Setting.access_token = access_token.to_hash
     pp access_token
 
     redirect_to 'https://app.storyblok.com/oauth/app_redirect', allow_other_host: true

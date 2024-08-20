@@ -1,4 +1,4 @@
-
+=begin
 frame_images = Dir.glob('app/assets/images/prototype/images/*.webp')
 frame_images = frame_images.concat Dir.glob('app/assets/images/prototype/videos/*.webm')
 frames = frame_images.each_with_index.map do |file, index|
@@ -38,3 +38,4 @@ music.audio.attach(io: File.open('app/assets/images/prototype/audio/music.mp3'),
 
   puts "Created #{meditation.keyframes.count} frames with duration #{seconds}"
 end
+=end
