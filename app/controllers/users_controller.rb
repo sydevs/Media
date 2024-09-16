@@ -82,7 +82,7 @@ class UsersController < ApplicationController
       categories = []
 
       # Show quick meditations on Monday - Friday mornngs, otherwise time of day meditations
-      if @time_of_day == :morning && 1 <= @datetime.wday <= 5
+      if @time_of_day == :morning && 1 <= @datetime.wday && @datetime.wday <= 5
         categories << :short
       else
         categories << @time_of_day
