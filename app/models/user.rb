@@ -22,7 +22,7 @@ class User < ApplicationRecord
     when 'unsave'
       saved_meditations.delete(meditation)
     when 'meditation'
-      mv = meditation_views.create({
+      meditation_views.create!({
         meditation_id: action['meditation_id'],
         progress: action['progress'].to_i,
         rating: action['rating'].to_i,

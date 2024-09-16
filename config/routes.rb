@@ -20,5 +20,6 @@ Rails.application.routes.draw do
     #get :home, on: :collection
     get :feed, on: :member
     post :track, on: :member
+    get :parameters, on: :collection
   end
 end

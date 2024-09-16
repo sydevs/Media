@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     }
   end
 
+  def parameters
+    return unless params[:type]
+    data = translate("users.#{params[:type]}")
+    render json: data.to_a.map! { |p| { name: p.last, value: p.first } }
+  end
+
   private
 
     def feature_sections
@@ -76,7 +82,7 @@ class UsersController < ApplicationController
       categories = []
 
       # Show quick meditations on Monday - Friday mornngs, otherwise time of day meditations
-      if @time_of_day == :morning && 1 <= @datetime.wday <= 5
+      if @time_of_day == :morning && 1 <= @datetime.wday && @datetime.wday <= 5
         categories << :short
       else
         categories << @time_of_day
