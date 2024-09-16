@@ -49,3 +49,15 @@ en:
     evening: "Your evening respite"
     recommended_meditations: "Recommended For You"
     saved_meditations: "Your saved meditations"
+
+  users:
+    seen:
+      realisation: "Self-Realisation"
+      path: "Path"
+      music: "Meditation Music"
+      introspect: "Introspect"
+      map: "Map of Public Programs"
+    unlocked:
+      realisation: "Self-Realisation"
+      footsoak: "Footsoaking"
+      lectures: "Shri Mataji's Talks"

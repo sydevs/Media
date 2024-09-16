@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     }
   end
 
+  def parameters
+    return unless params[:type]
+    data = translate("users.#{params[:type]}")
+    render json: data.to_a.map! { |p| { name: p.last, value: p.first } }
+  end
+
   private
 
     def feature_sections
