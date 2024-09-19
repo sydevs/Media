@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
       if Setting.access_token == nil && params[:init_oauth] == "true"
         redirect_to connect_path(request.query_parameters)
       elsif Setting.access_token == nil
-        render status: :forbidden, text: "403 Forbidden"
+        head :forbidden
       end
     end
 
