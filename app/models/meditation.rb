@@ -45,42 +45,39 @@ class Meditation < ApplicationRecord
   private
 
     def create_in_storyblok
-      client_id = ENV.fetch('STORYBLOK_CLIENT_ID')
-      client_secret = ENV.fetch('STORYBLOK_CLIENT_SECRET')
-      space_id = ENV.fetch('STORYBLOK_SPACE_ID') # Ensure you have this environment variable set
-
-      client = Storyblok::Client.new(oauth_token: 'MY_TOKEN')
-      response = client.post("/spaces/#{space_id}/stories", {
-        story: {
-          name: self.title,
-          slug: self.title.parameterize, # Generate a slug from the title
-        },
-        publish: 1 # Set to 1 to publish immediately
+      space_id = ENV.fetch('STORYBLOK_SPACE_ID')
+      response = StoryblokApi.client.post("/spaces/#{space_id}/stories", {
+        story: storyblok_data,
+        publish: published ? 1 : 0,
       })
 
-      if response.status == 200
-        # Handle success
-        Rails.logger.info("Story created successfully: #{response.body}")
-      else
-        # Handle error
-        Rails.logger.error("Failed to create story: #{response.body}")
-      end
-
-      # ApplicationController.helpers.url_for(self)
-      # Within this class you can reference variables of the meditation model, just by calling their name.
-      # Take a look at schema.rb to find out what columns are on the Meditation table
+      self.storyblok_id = response['data']['story']['id']
     end
 
     def sync_to_storyblok
-      client_id = ENV.fetch('STORYBLOK_CLIENT_ID')
-      client_secret = ENV.fetch('STORYBLOK_CLIENT_SECRET')
-      client = OAuth2::Client.new(client_id, client_secret, {
-        site: 'https://app.storyblok.com',
-        auth_scheme: :request_body,
-      })
+      return unless %w[title uuid locale published].any? { |col| previous_changes.keys.include?(col) }
 
-      ApplicationController.helpers.url_for(self)
-      # Within this class you can reference variables of the meditation model, just by calling their name.
-      # Take a look at schema.rb to find out what columns are on the Meditation table
+      space_id = ENV.fetch('STORYBLOK_SPACE_ID')
+      StoryblokApi.client.put("/spaces/#{space_id}/stories/#{storyblok_id}", {
+        story: storyblok_data,
+        publish: published ? 1 : 0,
+        force_update: 1,
+      })
+    end
+
+    def storyblok_data
+      folder_id = 551014073 # "meditation-refs" folder
+      {
+          name: title,
+          slug: title.parameterize, # Generate a slug from the title
+          lang: 'en',
+          parent_id: folder_id,
+          content: {
+            component: 'MeditationRef',
+            data_url: Rails.application.routes.url_helpers.url_for([self, id: uuid, format: :json, host: 'https://media.sydevelopers.com']),
+            external_uuid: uuid,
+            locale: 'default',
+          },
+        }
     end
 end

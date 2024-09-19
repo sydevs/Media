@@ -2,14 +2,12 @@ require 'oauth2'
 
 class AuthController < ApplicationController
 
+  skip_before_action :authenticate!
   before_action :set_client
 
   def connect
-    puts "OAUTH CONNECT"
-    pp params
-
     if params[:space_id] != ENV.fetch('STORYBLOK_SPACE_ID')
-      head :forbidden
+      render status: :forbidden, text: "403 Forbidden"
       return
     end
 
@@ -30,15 +28,13 @@ class AuthController < ApplicationController
   end
 
   def callback
-    puts "OAUTH CALLBACK"
-    pp params
-    if params[:state] != session[:state] || params[:space_id] != ENV.fetch('STORYBLOK_SPACE_ID')
-      head :forbidden
+    if (params[:state].present? && params[:state] != session[:state]) || params[:space_id] != ENV.fetch('STORYBLOK_SPACE_ID')
+      render status: :forbidden, text: "403 Forbidden"
       return
     end
 
     access_token = @client.auth_code.get_token(params[:code], redirect_uri: callback_url)
-    Setting.access_token = access_token.to_hash
+    Setting.access_token = access_token.as_json
     pp access_token
 
     redirect_to 'https://app.storyblok.com/oauth/app_redirect', allow_other_host: true

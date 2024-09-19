@@ -17,8 +17,8 @@ class Setting < ActiveRecord::Base
         # key/value setup
         method = method.chop
         method = method.chop if method[-1,1] == "!"
-        value = {:value => args[0]}
-        setting = self.find(:first, :conditions => {:key => method})
+        value = { value: args[0] }
+        setting = self.find_by(key: method)
         if value[:value].nil?
           setting.destroy if setting
         else
@@ -45,7 +45,7 @@ class Setting < ActiveRecord::Base
       if skip_cache.nil? && (result = @__cache.read(method.to_s))
         return result[:value]
       else
-        result = self.find(:first, :conditions => {:key => method})
+        result = self.find_by(key: method)
         if result
           return result.value[:value]
         end
@@ -100,7 +100,7 @@ class Setting < ActiveRecord::Base
       if skip_cache.nil? && (result = @__cache.read(method.to_s))
         return result[:value]
       else
-        result = self.find(:first, :conditions => {:key => method})
+        result = self.find_by(key: method)
         if result
           @__cache.write(method, result.value, :expires_in => @__cache_expires_in)
           return result.value[:value]

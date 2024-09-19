@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_20_165109) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_19_200802) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -80,6 +80,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_165109) do
     t.string "uuid"
     t.integer "narrator", default: 0, null: false
     t.string "music_tag"
+    t.integer "storyblok_id"
   end
 
   create_table "musics", force: :cascade do |t|
@@ -88,6 +89,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_20_165109) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "credit"
+    t.integer "storyblok_id"
   end
 
   create_table "settings", force: :cascade do |t|
