@@ -30,6 +30,7 @@ class Music < ApplicationRecord
     end
 
     def sync_to_storyblok
+      create_in_storyblok && return unless storyblok_id.present?
       return unless %w[title published].any? { |col| previous_changes.keys.include?(col) }
 
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
