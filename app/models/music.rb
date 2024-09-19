@@ -26,7 +26,11 @@ class Music < ApplicationRecord
         publish: published ? 1 : 0,
       })
 
-      self.storyblok_id = response['data']['story']['id']
+      if new_record?
+        self.storyblok_id = response['data']['story']['id']
+      else
+        update_column :storyblok_id, response['data']['story']['id']
+      end
     end
 
     def sync_to_storyblok
