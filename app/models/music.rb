@@ -35,7 +35,7 @@ class Music < ApplicationRecord
 
     def sync_to_storyblok
       create_in_storyblok && return unless storyblok_id.present?
-      return unless %w[title published].any? { |col| previous_changes.keys.include?(col) }
+      return unless %w[title published tags].any? { |col| previous_changes.keys.include?(col) }
 
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
       StoryblokApi.client.put("/spaces/#{space_id}/stories/#{storyblok_id}", {
@@ -52,6 +52,7 @@ class Music < ApplicationRecord
           slug: title.parameterize, # Generate a slug from the title
           lang: 'en',
           parent_id: folder_id,
+          tag_list: tags.pluck(:name),
           content: {
             component: 'MusicRef',
             # data_url: Rails.application.routes.url_helpers.url_for([self, id: uuid, format: :json, host: 'https://media.sydevelopers.com']),
