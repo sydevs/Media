@@ -25,7 +25,7 @@ class Music < ApplicationRecord
       folder_id = 551014134 # "music-refs" folder
       {
           name: title,
-          slug: title.parameterize, # Generate a slug from the title
+          slug: "#{title.parameterize}-#{uuid}", # Generate a slug from the title and uuid
           lang: 'en',
           parent_id: folder_id,
           tag_list: tag_list,

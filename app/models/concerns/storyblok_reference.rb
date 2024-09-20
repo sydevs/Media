@@ -17,7 +17,7 @@ module StoryblokReference
         story_only: true,
         in_trash: false,
       }
-      
+
       response = StoryblokApi.client.get("/spaces/#{space_id}/stories?#{params.to_query}")
 
       if response['data']['stories'].present?
@@ -46,7 +46,7 @@ module StoryblokReference
     end
 
     def sync_to_storyblok
-      create_in_storyblok && return unless storyblok_id.present?
+      find_in_storyblok && return unless storyblok_id.present?
       return unless %w[title uuid locale published tags].any? { |col| previous_changes.keys.include?(col) }
 
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
