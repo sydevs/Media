@@ -32,7 +32,7 @@ class Music < ApplicationRecord
           content: {
             component: 'MusicRef',
             data_url: Rails.application.routes.url_helpers.url_for([self, id: uuid, format: :json, host: 'https://media.sydevelopers.com']),
-            external_uuid: id,
+            external_uuid: uuid,
           },
         }
     end

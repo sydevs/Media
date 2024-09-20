@@ -5,10 +5,15 @@ module StoryblokReference
 
   included do
     after_create :create_in_storyblok
-    after_update :sync_to_storyblok
+    after_update :sync_after_save
   end
 
   private
+
+    def sync_after_save
+      return unless %w[title uuid locale published tags].any? { |col| previous_changes.keys.include?(col) }
+      sync_to_storyblok
+    end
 
     def find_in_storyblok
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
@@ -47,7 +52,6 @@ module StoryblokReference
 
     def sync_to_storyblok
       find_in_storyblok && return unless storyblok_id.present?
-      return unless %w[title uuid locale published tags].any? { |col| previous_changes.keys.include?(col) }
 
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
       StoryblokApi.client.put("/spaces/#{space_id}/stories/#{storyblok_id}", {
