@@ -1,65 +1,52 @@
 
-.ui.text.container
-  = simple_form_for @meditation do |f|
-    - if f.object.errors.present?
-      pre = f.object.errors.messages
+= simple_form_for @meditation do |f|
+  - if f.object.errors.present?
+    .ui.negative.message
+      ul
+        - f.object.errors.full_messages.each do |message|
+          li = message
 
-    .field = f.input :title
-    .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
+  .field = f.input :title
+  .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
 
-    - unless f.object.new_record?
-      .field
-        label Make Visible to Public
-        = f.input :published, label: "Yes"
-
-    .ui.divider
+  - unless f.object.new_record?
     .field
-      .ui.two.column.grid
-        .column
-          = f.input :audio
-          = f.input :narrator, collection: Meditation.narrators.keys, include_blank: false, include_hidden: false
-          = f.input :music_tag, hint: "Random music tracks will be selected using this tag"
-        .column
-          - if f.object.audio.present?
-            p.wrap
-              strong Current file: 
-              = f.object.audio.filename
+      label Make Visible to Public
+      = f.input :published, label: "Yes"
 
-            audio src=f.object.audio.url controls=true
-
-    .ui.divider
-    .field
-      .ui.two.column.grid
-        .column
-          = f.input :art
-        .column
+  .ui.divider
+  .field
+    .ui.two.column.grid
+      .column
+        = f.input :audio
+        = f.input :narrator, collection: Meditation.narrators.keys, include_blank: false, include_hidden: false
+        = f.input :music_tag, hint: "Random music tracks will be selected using this tag"
+      .column
+        - if f.object.audio.present?
           p.wrap
             strong Current file: 
-            = f.object.art.present? ? f.object.art.filename : 'default'
+            = f.object.audio.filename
 
-          = image_tag f.object.thumbnail_url, class: "ui bordered rounded large image"
+          audio src=f.object.audio.url controls=true
 
-    .ui.section.divider
+  .ui.divider
+  .field
+    .ui.two.column.grid
+      .column
+        = f.input :art
+      .column
+        p.wrap
+          strong Current file: 
+          = f.object.art.present? ? f.object.art.filename : 'default'
 
-    p
-      button.ui.submit.teal.button
-        | Save
-      a.ui.button href=meditations_path
-        | Back
+        = image_tag f.object.thumbnail_url, class: "ui bordered rounded large image"
 
-    - unless f.object.new_record?
-      = f.input :embed_url
-        .ui.action.input
-          = f.input_field :embed_url, value: meditation_url(f.object.uuid)
-          a.ui.button href=meditation_url(f.object.uuid) target='_blank'
-            i.eye.icon
-            | View
+  .ui.section.divider
 
-      = f.input :data_url
-        .ui.action.input
-          = f.input_field :embed_url, value: meditation_url(f.object.uuid, format: :json)
-          a.ui.button href=meditation_url(f.object.uuid, format: :json) target='_blank'
-            i.eye.icon
-            | View
- 
+  p
+    button.ui.submit.teal.button
+      | Save
+    a.ui.button href=meditations_path
+      | Back
+
 .ui.hidden.section.divider

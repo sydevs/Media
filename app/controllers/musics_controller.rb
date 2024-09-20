@@ -5,6 +5,10 @@ class MusicsController < ApplicationController
     @tags = %w[default morning afternoon evening]
   end
 
+  def show
+    @music = Music.find_by!(uuid: params[:id])
+  end
+
   def new
     @music = Music.new
   end

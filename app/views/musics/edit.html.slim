@@ -2,4 +2,15 @@
 h1.ui.dividing.header
   | Editing #{@music.title}
 
-= render 'form'
+.ui.text.container
+  = render 'form'
+
+  = simple_form_for @music do |f|
+    = f.input :data_url
+      .ui.action.input
+        = f.input_field :embed_url, value: music_url(f.object.uuid, format: :json)
+        a.ui.button href=music_url(f.object.uuid, format: :json) target='_blank'
+          i.eye.icon
+          | View
+
+.ui.hidden.section.divider

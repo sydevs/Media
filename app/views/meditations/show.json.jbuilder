@@ -1,5 +1,5 @@
 
-json.id @meditation.id
+json.uuid @meditation.uuid
 json.title @meditation.title
 json.tags @meditation.tags.map(&:name)
 json.audio_url @meditation.audio&.url

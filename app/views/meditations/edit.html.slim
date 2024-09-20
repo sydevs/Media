@@ -2,4 +2,22 @@
 h1.ui.dividing.header
   | Editing #{@meditation.title}
 
-= render 'form'
+.ui.text.container
+  = render 'form'
+
+  = simple_form_for @meditation do |f|
+    = f.input :embed_url
+      .ui.action.input
+        = f.input_field :embed_url, value: meditation_url(f.object.uuid)
+        a.ui.button href=meditation_url(f.object.uuid) target='_blank'
+          i.eye.icon
+          | View
+
+    = f.input :data_url
+      .ui.action.input
+        = f.input_field :embed_url, value: meditation_url(f.object.uuid, format: :json)
+        a.ui.button href=meditation_url(f.object.uuid, format: :json) target='_blank'
+          i.eye.icon
+          | View
+
+.ui.hidden.section.divider
