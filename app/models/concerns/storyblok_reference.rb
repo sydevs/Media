@@ -10,6 +10,27 @@ module StoryblokReference
 
   private
 
+    def find_in_storyblok
+      space_id = ENV.fetch('STORYBLOK_SPACE_ID')
+      params = {
+        with_slug: "#{model_name.route_key}-refs/#{storyblok_data[:slug]}",
+        story_only: true,
+        in_trash: false,
+      }
+      
+      response = StoryblokApi.client.get("/spaces/#{space_id}/stories?#{params.to_query}")
+
+      if response['data']['stories'].present?
+        if new_record?
+          self.storyblok_id = response['data']['stories'][0]['id']
+        else
+          update_column :storyblok_id, response['data']['stories'][0]['id']
+        end
+      else
+        create_in_storyblok
+      end
+    end
+
     def create_in_storyblok
       space_id = ENV.fetch('STORYBLOK_SPACE_ID')
       response = StoryblokApi.client.post("/spaces/#{space_id}/stories", {
@@ -35,7 +56,7 @@ module StoryblokReference
         force_update: 1,
       })
     rescue RestClient::NotFound
-      create_in_storyblok
+      find_in_storyblok
     end
 
 end
