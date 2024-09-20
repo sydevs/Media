@@ -38,6 +38,7 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
 
   # Allow iframe embeds
+  config.action_dispatch.cookies_same_site_protection = :none
   config.action_dispatch.default_headers = {
     'X-Frame-Options' => 'ALLOW-FROM https://app.storyblok.com'
   }
