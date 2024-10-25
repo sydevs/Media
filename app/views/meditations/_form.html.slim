@@ -7,7 +7,13 @@
           li = message
 
   .field = f.input :title
-  .field = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
+
+  pre = session[:is_admin]
+  pre = ActsAsTaggableOn::Tag.for_context(:tags).to_a.pretty_inspect
+  - if session[:is_admin]
+    = f.input :tag_list, input_html: { value: f.object.tag_list.join(", ") }
+  - else
+    = f.association :tags, input_html: { multiple: true, class: 'clearable' }
 
   - unless f.object.new_record?
     .field

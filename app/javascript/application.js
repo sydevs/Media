@@ -7,3 +7,8 @@ import "editor"
 if (typeof window !== 'undefined' && window.top === window.self && window.location.pathname == '/storyblok') { 
   window.location.assign('https://app.storyblok.com/oauth/app_redirect')
 }
+
+$(document).on('turbo:load', function() {
+  $(".ui.checkbox").checkbox()
+  $(".ui.dropdown").dropdown()
+});

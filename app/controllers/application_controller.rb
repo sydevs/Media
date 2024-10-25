@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
   private
 
     def authenticate!
+      if session[:is_admin].nil?
+        session[:is_admin] = params[:user_is_admin] ? params[:user_is_admin] == 'true' : false
+      end
+
       #if params[:space_id] != ENV.fetch('STORYBLOK_SPACE_ID') || params[:slug] != ENV.fetch('STORYBLOK_SLUG')
       #  render status: :forbidden, text: "403 Forbidden"
       #els
