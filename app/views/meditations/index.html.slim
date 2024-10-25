@@ -1,8 +1,6 @@
 
 h1.ui.dividing.header Meditations
 
-pre = session[:is_admin]
-
 = form_tag request.original_url, method: :get, class: 'ui inline form' do
   a.ui.teal.basic.button href=new_meditation_path
     | New Meditation
